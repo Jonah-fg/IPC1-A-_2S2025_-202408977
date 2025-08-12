@@ -1,0 +1,122 @@
+package personajess;
+import java.io.InputStream;
+import java.util.Scanner; 
+
+public class Personajess {
+        static int ContadordePersonajes=0;
+        static Scanner scanner = new Scanner(System.in);
+        static String[] nombresPersonajes = new String[100]; 
+        static String[][] habilidades = new String[100][5];
+        static String[] Armas = new String[100];
+        static short[] nivelpower = new short [100];
+        static int opcioness=0;
+    public static void main(String[] args) {
+     
+        do {
+            System.out.println("=== Menú de Gestión de Personajes ===");
+            System.out.println("Elige una opción: ");
+            System.out.println("1. Agregar Personaje");
+            System.out.println("2. Modificar Personaje");
+            System.out.println("3. Eliminar Personaje");
+            System.out.println("4. Ver Datos de un Personaje");
+            System.out.println("5. Ver Listado de Personajes");
+            System.out.println("6. Realizar Pelea entre Personajes");
+            System.out.println("7. Ver Historial de Peleas");
+            System.out.println("8. Ver Datos del Estudiante");
+            System.out.println("9. Salir");
+      
+            opcioness = scanner.nextInt();
+            
+            switch (opcioness) {
+                
+                case 1:
+                agregarunPersonaje();
+                break;
+                
+                case 2:
+                modificarelPersonaje(); 
+                break;
+                
+                case 3:
+                eliminarPersonajes();
+                break;
+                
+                case 4:
+                verdatosdeunPersonaje();
+                break;
+                
+                case 5:
+                versiltadodePersonajes();
+                break;
+                
+                case 6: 
+                peleasdePersonajes();
+                break;
+                
+                case 7:
+                historialdePeleas();
+                break;
+                
+                case 8:
+                DatosdeEstudiante();
+                break;
+                
+                case 9:
+                System.out.println("usted esat saliendo");
+                break;
+                
+                default:
+                System.out.println("opcion no disponible, ingrese una opcion valida :( ");  
+                
+            } 
+        } while (opcioness !=9);
+    }  
+
+    public static void agregarunPersonaje() {
+       Scanner scanner=new Scanner(System.in);
+       System.out.println("agrega un personaje");
+       
+        System.out.println("escribe el nombre del personaje");
+        String nombre = scanner.nextLine();
+        for (int iterador = 0; iterador < ContadordePersonajes ; ++iterador){ 
+            if (nombresPersonajes[iterador].equalsIgnoreCase(nombre)) { 
+                System.out.println("el nombre del personaje ya existe");
+                return; }
+            
+      }  
+    }
+          
+
+    public static void modificarelPersonaje() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void eliminarPersonajes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void verdatosdeunPersonaje() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void peleasdePersonajes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void versiltadodePersonajes() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void historialdePeleas() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public static void DatosdeEstudiante() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private static String scanner(InputStream in) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+   
+}
