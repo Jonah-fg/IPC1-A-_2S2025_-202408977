@@ -7,7 +7,7 @@ public class productos {
     private String categoria;
     
     //constructor
-    public class productos(int nombre, String categoria, String ID, double precio, int cantidad); {
+    public class productos(int nombre, String categoria, String ID, double precio, int cantidad){
     
         this.nombre = nombre;
         this.categoria = categoria;
@@ -31,6 +31,7 @@ public class productos {
     public String getCategoria() {
         return categoria;
     }
+    
     //settings
     public void setNombre(String nombre) {
         this.nombre = nombre;
