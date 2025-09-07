@@ -34,7 +34,7 @@ public class Inventario {
         String codigo = scanner.nextLine();
         
         for(int i=0; i<contadorProductos; i++){
-            if (productos[i].equals(codigo)){
+            if (productos[i].getID().equals(codigo)){
                 System.out.println("El codigo ya existe, ingrese uno valido");
                 agregarBitacora("agregar producto", "Error del sistema; el codigo esta duplicado");
                 return;
@@ -56,7 +56,93 @@ public class Inventario {
             return;
         }
         System.out.println("Categoria del producto: ");
-        String categoriaProducto = scanner.nextLine();
-    
+        String categoriaProducto = scanner.nextLine();   
+        
+        productos[contadorProductos] = new productos(nombreProducto, categoriaProducto, codigo, precioProducto, cantidad);  
+            contadorProductos++;
+            
+            System.out.println("Producto agregado exitosamente");
+            agregarBitacora("Agregar Producto", "Éxito");
+              
     }
+    
+    public void eliminarProducto(Scanner scanner){
+        System.out.println("-----Eliminar producto-----");
+        System.out.println("Ingrese el codigo del producto: ");
+        String codigo=scanner.nextLine(); 
+        
+        int posicionEncontrada = -2;
+        
+        for(int i =0; i<contadorProductos; i++){
+            if(productos[i].getID().equals(codigo)){
+                posicionEncontrada =  i;
+                break;
+            }
+        }
+        if(posicionEncontrada== -2){
+            System.out.println("no se encontro el producto :( ");
+            agregarBitacora("Eliminar producto", "Error: preoducto no encontrado :( ");
+            return;       
+        }
+        
+        System.out.println("El producto fue encontrado");
+        productos[posicionEncontrada].MostrarProducto();
+        
+        System.out.println("¿deseas eliminar este producto? (SI/NO)");
+        String confirmacion = scanner.nextLine();
+        
+        if(confirmacion.equalsIgnoreCase("SI")){
+            for(int indice = posicionEncontrada+1; indice<contadorProductos; indice++){
+                productos[indice - 1] = productos[indice];
+            }
+            contadorProductos--;
+            System.out.println("El producto fue eliminado exitosamente :) ");
+            agregarBitacora("Eliminar preoduct", "Exito: el producto fue elimi ado" );
+        }
+        else{
+            System.out.println("Se cancelo la elimnacion del producto :( ");
+            agregarBitacora("Elimknar producto", "Error: se cancelo la eliminacion");
+        }           
+    }
+    
+    
+    public void registroVentas(Scanner scanner){
+         System.out.println("--- REGISTRAR VENTA ---");
+         System.out.println("ingrese el codigo del producto: ");
+         String codigo = scanner.nextLine(); 
+         
+        int posicionEncontradaventa = -2;
+        for (int i =0; i<contadorProductos; i++){
+             if(productos[i].getID().equals(codigo)){
+                posicionEncontradaventa =  i;
+                break;
+             }
+        }
+        if (posicionEncontradaventa==-2){
+        System.out.println("El producto no fue encontrado :( ");
+        agregarBitacora("Registrar venta", "Error: el producto no fue encontrado");
+            return;
+        }
+        
+        System.out.println("igrese la cantidad a vender: ");
+        int cantidad = scanner.nextInt();
+        scanner.nextLine();
+        
+        if(cantidad>productos[posicionEncontradaventa].getCantidad()){
+            System.out.println("no hay suficiente Stock para ete producto. disponible: "+ productos[posicionEncontradaventa].getCantidad());
+            agregarBitacora("registrar venta", "Error: stock insuficiente para este producto");
+            return;
+        } 
+        System.out.println("calculando el total");
+        double total = cantidad * productos[posicionEncontradaventa].getPrecio();
+        System.out.println("venta registrada exitosamente");
+        System.out.println("el total a pagar es de: Q"+ total);
+        agregarBitacora("Registrar venta", "Exito: venta registrada");
+        
+         productos[posicionEncontradaventa].setCantidad(productos[posicionEncontradaventa].getCantidad()-cantidad);
+         ventas[contadorVentas]= new ventas(codigo, cantidad, total);
+         contadorVentas++;
+    }
+    if
+                     
 }

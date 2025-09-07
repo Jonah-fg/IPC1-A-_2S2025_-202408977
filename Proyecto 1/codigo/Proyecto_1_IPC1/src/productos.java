@@ -7,7 +7,7 @@ public class productos {
     private String categoria;
     
     //constructor
-    public class productos(int nombre, String categoria, String ID, double precio, int cantidad){
+    public productos(String nombre, String categoria, String ID, double precio, int cantidad){
     
         this.nombre = nombre;
         this.categoria = categoria;

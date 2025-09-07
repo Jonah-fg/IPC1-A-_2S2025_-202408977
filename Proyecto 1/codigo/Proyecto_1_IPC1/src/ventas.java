@@ -7,7 +7,7 @@ public class ventas {
     private int cantidadVenta;
     private String fechayhora;
     
-    public ventas(String codigoProducto, int CantidadVenta, double total){
+    public ventas(String codigoProducto, int cantidadVenta, double total){
         
         this.cantidadVenta=cantidadVenta;
         this.codigoProducto=codigoProducto;
