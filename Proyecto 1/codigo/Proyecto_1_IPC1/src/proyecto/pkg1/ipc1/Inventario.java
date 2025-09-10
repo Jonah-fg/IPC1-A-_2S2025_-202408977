@@ -1,7 +1,5 @@
-
+package proyecto.pkg1.ipc1; 
 import java.util.Scanner;
-
-
 public class Inventario {
     private productos[] productos;
     private ventas[] ventas;
@@ -21,6 +19,7 @@ public class Inventario {
         contadorProductos = 0;
         contadorBitacora = 0;
     }
+    
     private void agregarBitacora(String nombreAccion, String estadoResultado){
         if(contadorBitacora<max){
             bitacora[contadorBitacora]=new bitacora(nombreAccion, estadoResultado, Usuario);
@@ -56,13 +55,13 @@ public class Inventario {
             return;
         }
         System.out.println("Categoria del producto: ");
-        String categoriaProducto = scanner.nextLine();   
+        String categoriaProducto = scanner.nextLine();
         
         productos[contadorProductos] = new productos(nombreProducto, categoriaProducto, codigo, precioProducto, cantidad);  
             contadorProductos++;
             
             System.out.println("Producto agregado exitosamente");
-            agregarBitacora("Agregar Producto", "Éxito");
+            agregarBitacora("Agregar Producto", "Éxito: producto agregado");
               
     }
     
@@ -143,6 +142,58 @@ public class Inventario {
          ventas[contadorVentas]= new ventas(codigo, cantidad, total);
          contadorVentas++;
     }
-    if
+    public void buscarProducto(Scanner scanner){
+        System.out.println("----Bucador de productos----");
+        System.out.println("ingrese el codigo o el nombre del producto: ");
+        
+            if(contadorProductos==0){
+                System.out.println("No hay preoductos disponibles para buscar");
+                agregarBitacora("Buscar producto","Error: sin productos en el sistema");
+                return;
+        }
+            
+        String buscador = scanner.nextLine();
+        boolean encontrado= false;
+        
+        for(int i =0; i<contadorProductos; i++){
+            if(productos[i].getID().equalsIgnoreCase(buscador)||productos[i].getNombre().contains(buscador.toLowerCase())){
+                System.out.println("el produto fue encontrado :): ");
+                productos[i].MostrarProducto();
+                encontrado=true;
+            }
+        }
+        if(encontrado==false){
+            System.out.println("El producto no fue encontrado con este criterio de busqyeda :( ");
+        }
+        agregarBitacora("Buscar Producto", encontrado ? "Éxito" : "No encontrado");
+    }
+    
+    public void verBItacora(){
+        System.out.println("----VER SISTEMA DE BITACORAS----");
+        if(contadorBitacora==0){
+            System.out.println("no hay bitacoras registradas aun :( ");
+            return;
+        }
+        for(int i=0; i<contadorBitacora;i++){
+            bitacora[i].mostrarRegistro();
+        }
+    }
+    
+    public void generacionReportes(){
+        System.out.println("----REPORTES SOBRE LOS STOCK----");
+        if(contadorProductos==0){
+              System.out.println("No hay productos creados en el inventario :( ");
+            agregarBitacora("Generar reportes","Error: producto inexistentes en el inventario");
+            return;
+        }
+        for(int i=0; i<contadorProductos; i++){
+            productos[i].MostrarProducto();
+        }
+        agregarBitacora("Generar reporte", "Exito: reporte del stock generado :) ");
+    }
+
+    void datosEstudiante() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
                      
 }

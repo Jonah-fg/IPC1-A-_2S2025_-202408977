@@ -1,4 +1,4 @@
-
+package proyecto.pkg1.ipc1; 
 public class productos {
     private String nombre;
     private String ID;

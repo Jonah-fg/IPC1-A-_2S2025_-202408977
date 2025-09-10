@@ -2,11 +2,11 @@
 package proyecto.pkg1.ipc1;
 
 import java.util.Scanner;
-
 public class Proyecto1IPC1 {
     
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        Inventario inv= new Inventario();
         int Opciones;
         do{
             System.out.println("-----SISTEMA------");
@@ -21,7 +21,46 @@ public class Proyecto1IPC1 {
             System.out.println("Selecciona una opcion: ");
             
             Opciones=scanner.nextInt();
-        }
+            scanner.nextLine();
+            
+            switch(Opciones){
+                
+                case 1:
+                    inv.agragarunProducto(scanner);
+                    break;
+                    
+                case 2: 
+                    inv.buscarProducto(scanner);
+                    break;
+                
+                case 3:
+                    inv.eliminarProducto(scanner);
+                    break;
+                
+                case 4:
+                    inv.registroVentas(scanner);
+                    break;
+                    
+                case 5:
+                    inv.generacionReportes();
+                    break;
+                    
+                case 6:
+                    inv.datosEstudiante();
+                    break;
+                    
+                case 7:
+                    inv.verBItacora();
+                    break;
+                    
+                case 8:
+                    System.out.println("Esta saliendo del programa, feliz dia :) ");
+                    break;
+                    
+                default:
+                    System.out.println("Esta opcion no es valida, ingrese uno valido");
+            }         
+        } while(Opciones !=8);
     }
    
 }
