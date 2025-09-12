@@ -19,14 +19,14 @@ public class Inventario {
         contadorProductos = 0;
         contadorBitacora = 0;
     }
-    
+    //metodo para agregar bitacora
     private void agregarBitacora(String nombreAccion, String estadoResultado){
         if(contadorBitacora<max){
             bitacora[contadorBitacora]=new bitacora(nombreAccion, estadoResultado, Usuario);
             contadorBitacora++;
         }
     }
-    
+    //metodo agregar u n producto
     public void agragarunProducto(Scanner scanner){
         System.out.println("\n--- Agrega producto ---");
         System.out.println("ingrese el Codigo del producto nuevo: ");
@@ -50,7 +50,7 @@ public class Inventario {
         int cantidad = scanner.nextInt();
         
         if(precioProducto <= 0 || cantidad < 0){
-            System.out.println("Error: El precio y la cantidad deben ser positivos :( ");
+            System.out.println("Error: El precio o la cantidad deben ser positivos :( ");
             agregarBitacora("Agregar Producto", "Error: Datos no validos");
             return;
         }
@@ -70,15 +70,14 @@ public class Inventario {
         System.out.println("Ingrese el codigo del producto: ");
         String codigo=scanner.nextLine(); 
         
-        int posicionEncontrada = -2;
-        
+        int posicionEncontrada = -5;
         for(int i =0; i<contadorProductos; i++){
             if(productos[i].getID().equals(codigo)){
                 posicionEncontrada =  i;
                 break;
             }
         }
-        if(posicionEncontrada== -2){
+        if(posicionEncontrada== -5){
             System.out.println("no se encontro el producto :( ");
             agregarBitacora("Eliminar producto", "Error: preoducto no encontrado :( ");
             return;       
@@ -104,7 +103,7 @@ public class Inventario {
         }           
     }
     
-    
+    //meetodo para registrar ventas
     public void registroVentas(Scanner scanner){
          System.out.println("--- REGISTRAR VENTA ---");
          System.out.println("ingrese el codigo del producto: ");
@@ -142,6 +141,7 @@ public class Inventario {
          ventas[contadorVentas]= new ventas(codigo, cantidad, total);
          contadorVentas++;
     }
+    //metodo de buscar productos
     public void buscarProducto(Scanner scanner){
         System.out.println("----Bucador de productos----");
         System.out.println("ingrese el codigo o el nombre del producto: ");
@@ -168,7 +168,7 @@ public class Inventario {
         agregarBitacora("Buscar Producto", encontrado ? "Éxito" : "No encontrado");
     }
     
-    public void verBItacora(){
+    public void verBitacora(){
         System.out.println("----VER SISTEMA DE BITACORAS----");
         if(contadorBitacora==0){
             System.out.println("no hay bitacoras registradas aun :( ");
@@ -178,22 +178,23 @@ public class Inventario {
             bitacora[i].mostrarRegistro();
         }
     }
-    
+    //metodo para generar reportes
     public void generacionReportes(){
-        System.out.println("----REPORTES SOBRE LOS STOCK----");
+        System.out.println("----REPORTES SOBRE LOS STOCK Y VENTAS----");
         if(contadorProductos==0){
               System.out.println("No hay productos creados en el inventario :( ");
             agregarBitacora("Generar reportes","Error: producto inexistentes en el inventario");
             return;
+        }      
+        if(contadorProductos > 0) {
+          System.out.println("Se esta generando el PDF de stock");
+         PDFs.generadorreportesStock(productos, contadorProductos);
         }
-        for(int i=0; i<contadorProductos; i++){
-            productos[i].MostrarProducto();
+        if(contadorVentas>0){
+            System.out.println("se esta generando el PDF para ventas");
+            PDFs.generarReporteVentas(ventas, contadorProductos);
         }
-        agregarBitacora("Generar reporte", "Exito: reporte del stock generado :) ");
-    }
-
-    void datosEstudiante() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        agregarBitacora("Generar reporte", "Exito: reportes en PDF generados ");
     }
                      
 }

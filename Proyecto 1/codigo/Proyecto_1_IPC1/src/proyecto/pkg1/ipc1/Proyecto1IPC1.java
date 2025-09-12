@@ -46,11 +46,11 @@ public class Proyecto1IPC1 {
                     break;
                     
                 case 6:
-                    inv.datosEstudiante();
+                    datosEstudiante();
                     break;
                     
                 case 7:
-                    inv.verBItacora();
+                    inv.verBitacora();
                     break;
                     
                 case 8:
@@ -61,6 +61,13 @@ public class Proyecto1IPC1 {
                     System.out.println("Esta opcion no es valida, ingrese uno valido");
             }         
         } while(Opciones !=8);
+    }
+    
+    public static void datosEstudiante(){
+        System.out.println("----Datos del estudiante----");
+        System.out.println("Nombre: Jonathan Eduardo Fuentes Garcia");
+        System.out.println("Carnet: 202408977");
+        System.out.println("GitHub: ");
     }
    
 }

@@ -12,9 +12,9 @@ public class bitacora {
     //constructor
      public bitacora(String Accion, String ResultadoAccion, String Usuario) {
         this.fechayhoraAccion= new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date());
-        this.accion = accion;
-        this.usuario = usuario;
-        this.resultadoAccion = resultadoAccion;
+        this.accion = Accion;
+        this.usuario = Usuario;
+        this.resultadoAccion = ResultadoAccion;
     }
      
      public void mostrarRegistro() {
@@ -22,6 +22,7 @@ public class bitacora {
         System.out.println("Acción: " + accion);
         System.out.println("Resultado :" + resultadoAccion);
         System.out.println("Usuario: " + usuario);   
+         System.out.println("");
     }
      //Getters
     public String getFechayhoraAccion() {
