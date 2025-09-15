@@ -16,15 +16,14 @@ public class PDFs {
     
     public static void generadorreportesStock(productos productos[], int contadorProductos) {
         String nombrearchivoStock = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()) + "_Stock.pdf";
-        Document doc = new Document();
         
         try{
             Document docu = new Document();
              PdfWriter.getInstance(docu, new FileOutputStream(nombrearchivoStock));
-            doc.open();
+            docu.open();
             
-             doc.add(new Paragraph("REPORTE DE STOCK TIENDA"));
-            doc.add(Chunk.NEWLINE);
+             docu.add(new Paragraph("REPORTE DE STOCK TIENDA"));
+            docu.add(Chunk.NEWLINE);
              Font fuenteTitulo = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16);
             Paragraph titulo = new Paragraph("REPORTE DE STOCK TIENDA", fuenteTitulo);
             titulo.setAlignment(Element.ALIGN_CENTER);
@@ -61,7 +60,14 @@ public class PDFs {
         
         public static void generarReporteVentas(ventas[] ventas, int contadorVentas){
         String nombrearchivoVenta = new SimpleDateFormat("dd_MM_yyyy_HH_mm_ss").format(new Date()) + "_Venta.pdf";
+        if(ventas==null){
+            System.out.println("El array de ventas en nulo");
+        }
         
+        if(contadorVentas==0){
+            System.out.println("Aun no hay ventas para generar el reporte");
+            return;
+        }
         try {
             Document docu = new Document();
              PdfWriter.getInstance(docu, new FileOutputStream(nombrearchivoVenta));

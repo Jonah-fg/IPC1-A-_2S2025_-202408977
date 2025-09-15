@@ -67,7 +67,8 @@ public class Proyecto1IPC1 {
         System.out.println("----Datos del estudiante----");
         System.out.println("Nombre: Jonathan Eduardo Fuentes Garcia");
         System.out.println("Carnet: 202408977");
-        System.out.println("GitHub: ");
+        System.out.println("Curso: LABORATORIO INTRODUCCION A LA PROGRAMACION Y COMPUTACION 1, Sección A ");
+        System.out.println("GitHub: Jonah-fg ");
     }
    
 }

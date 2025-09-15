@@ -48,6 +48,7 @@ public class Inventario {
         
         System.out.print("Cantidad: ");
         int cantidad = scanner.nextInt();
+        scanner.nextLine();
         
         if(precioProducto <= 0 || cantidad < 0){
             System.out.println("Error: El precio o la cantidad deben ser positivos :( ");
@@ -192,7 +193,7 @@ public class Inventario {
         }
         if(contadorVentas>0){
             System.out.println("se esta generando el PDF para ventas");
-            PDFs.generarReporteVentas(ventas, contadorProductos);
+            PDFs.generarReporteVentas(ventas, contadorVentas);
         }
         agregarBitacora("Generar reporte", "Exito: reportes en PDF generados ");
     }
