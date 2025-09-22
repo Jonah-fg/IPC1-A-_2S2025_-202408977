@@ -1,4 +1,4 @@
-package proyecto.pkg1.ipc1; 
+      package proyecto.pkg1.ipc1; 
 import java.text.SimpleDateFormat;
 import java.util.Date;
 public class ventas {

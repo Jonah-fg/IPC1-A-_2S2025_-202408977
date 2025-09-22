@@ -7,6 +7,7 @@ public class Proyecto1IPC1 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Inventario inv= new Inventario();
+        Usuario U=new Usuario("Juan",123);
         int Opciones;
         do{
             System.out.println("-----SISTEMA------");
@@ -57,10 +58,15 @@ public class Proyecto1IPC1 {
                     System.out.println("Esta saliendo del programa, feliz dia :) ");
                     break;
                     
+                case 9:
+                    U.mostrarDatosUsuario();
+                    
+                    break;
+                    
                 default:
                     System.out.println("Esta opcion no es valida, ingrese uno valido");
             }         
-        } while(Opciones !=8);
+        } while(Opciones !=10);
     }
     
     public static void datosEstudiante(){
