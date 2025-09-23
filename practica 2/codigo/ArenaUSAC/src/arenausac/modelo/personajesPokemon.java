@@ -1,7 +1,7 @@
 
 package arenausac.modelo;
 
-public class Personajes_pokemon {
+public class personajesPokemon {
     private int ID;
     private String nombrePokemon;
     private String tipoArma;
@@ -11,7 +11,7 @@ public class Personajes_pokemon {
     private int agilidad;
     private int nivelAtaque;
 
-    public Personajes_pokemon(int ID, String nombrePokemon, String tipoArma, int velocidad, int puntosVida, int defensa, int agilidad, int nivelAtaque) {
+    public personajesPokemon(int ID, String nombrePokemon, String tipoArma, int velocidad, int puntosVida, int defensa, int agilidad, int nivelAtaque) {
         this.ID = ID++;
         this.nombrePokemon = nombrePokemon;
         this.tipoArma = tipoArma;
@@ -86,8 +86,5 @@ public class Personajes_pokemon {
     public void setNivelAtaque(int nivelAtaque) {
         this.nivelAtaque = nivelAtaque;
     }
-    
-    
-    public static boolean validacionNombre(String nombre, int contadorPokemon)
     
 }
