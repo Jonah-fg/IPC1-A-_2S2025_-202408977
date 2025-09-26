@@ -10,6 +10,9 @@ public class personajesPokemon {
     private int defensa;
     private int agilidad;
     private int nivelAtaque;
+    private int totalBatallas;
+    private int batallasGanadas;
+    private int batallasPerdidas;
 
     public personajesPokemon(int ID, String nombrePokemon, String tipoArma, int velocidad, int puntosVida, int defensa, int agilidad, int nivelAtaque) {
         this.ID = ID++;
@@ -20,6 +23,8 @@ public class personajesPokemon {
         this.defensa = defensa;
         this.agilidad = agilidad;
         this.nivelAtaque = nivelAtaque;
+        this.batallasGanadas=0;
+        this.batallasPerdidas=0;
     }
     //Getters
     public int getID() {
@@ -53,8 +58,26 @@ public class personajesPokemon {
     public int getNivelAtaque() {
         return nivelAtaque;
     }
+    
+    public int getBatallasPerdidas(){
+        return batallasPerdidas;
+    }
+    
+    public int getBatallasGanadas(){
+        return batallasPerdidas;
+    }
+    
+    public void incrementarBatallasPerdidas() {
+        this.batallasPerdidas++;
+        this.totalBatallas++;
+    }
+    
+    public void incrementarBatallasGanadas(){
+        this.batallasGanadas++;
+        this.totalBatallas++;
+    }
+    
     //Setters
-
     public void setID(int ID) {
         this.ID = ID;
     }
@@ -86,5 +109,5 @@ public class personajesPokemon {
     public void setNivelAtaque(int nivelAtaque) {
         this.nivelAtaque = nivelAtaque;
     }
-    
+
 }
