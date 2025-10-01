@@ -5,10 +5,11 @@
         <group>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/ArenaUSAC_IPC1.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/modelo/personajesPokemon.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/modelo/batallasPokemon.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/controlador/ControladorPokemon.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/controlador/ControladorBatallasPokemon.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/controlador/hilosPokemones.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/modelo/batallasPokemon.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/practica%202/codigo/ArenaUSAC/src/arenausac/vista/InterfazVisualPokemon.java</file>
         </group>
     </open-files>
 </project-private>
