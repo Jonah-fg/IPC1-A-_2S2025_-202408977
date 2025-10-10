@@ -1,10 +1,10 @@
 
 package Modelo;
 
-public class productosGenerales extends Productos{
+public class ProductosGenerales extends Productos{
     private String materialProducto;
     
-    public productosGenerales(String nombreProducto, String codigoProducto, String Categoria, double precio) {
+    public ProductosGenerales(String nombreProducto, String codigoProducto, double precio, String material) {
         super(nombreProducto, codigoProducto, "Generales", precio);
         this.materialProducto=materialProducto;
     }
@@ -16,4 +16,5 @@ public class productosGenerales extends Productos{
     public String getMaterialProducto() {
         return materialProducto;
     }
+    
 }

@@ -1,10 +1,10 @@
 
 package Modelo;
 
-public class Productostecnologicos extends Productos{
+public class ProductosTecnologicos extends Productos{
     private String mesesGarantia;
     
-    public Productostecnologicos(String nombreProducto, String codigoProducto, String Categoria, double precio) {
+    public ProductosTecnologicos(String nombreProducto, String codigoProducto, double precio, int mesesGarantia) {
         super(nombreProducto, codigoProducto, "Tecnologico", precio);
     }
 
