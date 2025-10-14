@@ -46,6 +46,15 @@ public class Productos {
     public void agregarStock(int cantidadStock){
         this.stock+=cantidadStock;
     }
+    public boolean reducirStock(int cantidadStock){
+        if (this.stock >= cantidadStock){
+        this.stock -= cantidadStock;
+        return true;
+        }
+        
+        return false;
+    }
+}
     
  
-}
+

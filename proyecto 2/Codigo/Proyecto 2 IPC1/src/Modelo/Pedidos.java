@@ -2,15 +2,15 @@
 package Modelo;
 
 public class Pedidos {
-    private String codigo;
+    private String codigoPedido;
     private String codigoCliente;
     private String nombreCliente;
     private String fechaGeneracion;
     private boolean confirmacion;
     private double total;
 
-    public Pedidos(String codigo, String codigoCliente, String nombreCliente, String fechaGeneracion, double total) {
-        this.codigo = codigo;
+    public Pedidos(String codigoPedido, String codigoCliente, String fechaGeneracion, String nombreCliente, double total) {
+        this.codigoPedido = codigoPedido;
         this.codigoCliente = codigoCliente;
         this.nombreCliente = nombreCliente;
         this.fechaGeneracion = fechaGeneracion;
@@ -20,7 +20,7 @@ public class Pedidos {
     
     //getters
     public String getCodigo() {
-        return codigo;
+        return codigoPedido;
     }
     public String getCodigoCliente() {
         return codigoCliente;
@@ -33,6 +33,10 @@ public class Pedidos {
     }
     public double getTotal() {
         return total;
+    }
+    
+    public boolean esConfirmado() {
+        return confirmacion;
     }
     
     //setters

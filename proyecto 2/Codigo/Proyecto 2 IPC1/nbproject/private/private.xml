@@ -9,16 +9,14 @@
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/Vendedor.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/Cliente.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/Productos.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/ProductosTecnologicos.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/ProductosAlimenticios.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/ProductosGenerales.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/Productostecnologicos.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/productosAlimenticios.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/productosGenerales.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/Pedidos.java</file>
             <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Vista/VistaCliente.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/CRUD.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/ProductosGestion.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/UsuariosGestion.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/UsuariosGestor.java</file>
-            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/GestorProductos.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/AdministradorUsuarios.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/AdministradorProductos.java</file>
+            <file>file:/C:/Users/hola%20k%20hace/Documents/IPC1-A-_2S2025_-202408977/proyecto%202/Codigo/Proyecto%202%20IPC1/src/Modelo/AdministradorPedidos.java</file>
         </group>
     </open-files>
 </project-private>

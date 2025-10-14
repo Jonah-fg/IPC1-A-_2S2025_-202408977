@@ -1,7 +1,7 @@
 
 package Modelo;
 
-public class AdministradorUsuarios implements OperacionesUsuarios {
+public class AdministradorUsuarios{
     private Usuario[] usuarios;
     private int contadorUsuarios;
     private int MAX;
@@ -12,15 +12,45 @@ public class AdministradorUsuarios implements OperacionesUsuarios {
         this.contadorUsuarios = 0;
     }
     
+    public Usuario buscarUsuarioCodigo(String codigo){
+        for(int i=0; i<contadorUsuarios; i++){
+            if(usuarios[i].getCodigo().equalsIgnoreCase(codigo)){
+               return usuarios[i];
+           }
+       }
+       return null;
+    }
+    
     public boolean crearUsuario(Usuario usuario){
-        if(contadorUsuarios<MAX){
-            usuarios[contadorUsuarios]=usuario;
+        if (contadorUsuarios <MAX&& buscarUsuarioCodigo(usuario.getCodigo()) == null) {
+            usuarios[contadorUsuarios]= usuario;
             contadorUsuarios++;
-            return true;    
+            return true;
         }
         return false;
     }
     
+    private void administradorDefecto(){
+        Administrador admin=new Administrador("Admin", "admin", "M", "IPC1A");
+        crearUsuario(admin);
+    }
+    
+    
+    public boolean crearUsuario (String nombre, String codigo, String genero, String contraseña){
+        Usuario usuario = new Usuario(nombre, codigo, genero, contraseña);
+        return crearUsuario(usuario);
+    }
+    
+    public boolean crearVendedor(String nombre, String codigoVendedor, String genero, String contraseña){
+        Vendedor vendedor = new Vendedor(nombre, codigoVendedor, genero, contraseña);
+        return crearUsuario(vendedor);
+    }
+    
+    public boolean crearCliente(String nombre, String codigoCliente, String genero, String contraseña, String fechaCumpleaños) {
+        Cliente cliente = new Cliente(nombre, codigoCliente, genero, contraseña, fechaCumpleaños);
+        return crearUsuario(cliente);
+    }
+ 
     public boolean actualizarUsuario(String nombreNuevo, String codigo, String contraseñaNueva) {
         Usuario usuario = buscarUsuarioCodigo(codigo);
         if (usuario != null) {
@@ -44,49 +74,20 @@ public class AdministradorUsuarios implements OperacionesUsuarios {
         return false;
     }
 
-    @Override
-    public Usuario buscarUsuarioCodigo(String codigo) {
-       for(int i=0; i<contadorUsuarios; i++){
-           if(usuarios[i].getCodigo().equalsIgnoreCase(codigo)){
-               return usuarios[i];
-           }
-       }
-       return null;
-    }
-
-    @Override
     public boolean autenticacion(String codigo, String contraseña) {
         Usuario usuario = buscarUsuarioCodigo(codigo);
         if(usuario !=null){
              return usuario.getContraseña().equals(contraseña);
         
         }
-        return false;
-       
+        return false;   
     }
     
-    @Override
     public Usuario[] obtenerTodosUsuarios() {
         Usuario[] todosUsuarios = new Usuario[contadorUsuarios];
         for (int i = 0; i < contadorUsuarios; i++) {
             todosUsuarios[i] = usuarios[i];
         }
         return todosUsuarios;
-    }
-
-    @Override
-    public boolean actualizar() {
-        return true;
-        
-    }
-
-    @Override
-    public boolean eliminar() {
-       return false;
-    }
-
-    @Override
-    public boolean crear() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }
