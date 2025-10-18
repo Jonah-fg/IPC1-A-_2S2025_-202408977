@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hola k hace
@@ -34,7 +36,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         txtContraseña = new javax.swing.JPasswordField();
-        btonLogin = new javax.swing.JButton();
+        btonIniciarSesion = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
 
@@ -76,7 +78,12 @@ public class VistaInicioSesion extends javax.swing.JFrame {
 
         txtContraseña.setText("jPasswordField1");
 
-        btonLogin.setText("Iniciar Sesion");
+        btonIniciarSesion.setText("Iniciar Sesion");
+        btonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonIniciarSesionActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel3.setText("SANCARLISTA SHOP");
@@ -96,7 +103,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addComponent(btonLogin))
+                        .addComponent(btonIniciarSesion))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,7 +133,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(btonLogin)
+                .addComponent(btonIniciarSesion)
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
@@ -136,6 +143,22 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
+
+    private void btonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonIniciarSesionActionPerformed
+        String codigo = txtCodigo.getText();
+        String contraseña = new String(txtContraseña.getPassword());
+
+        if (codigo.equals("admin") && contraseña.equals("IPC1A")){
+            this.dispose();
+            VistaAdministrador vistaAdmin=new VistaAdministrador();
+            vistaAdmin.setVisible(true);
+        
+        }
+        else{
+            JOptionPane.showMessageDialog(this,"Código o contraseña incorrectas");
+        }
+
+    }//GEN-LAST:event_btonIniciarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -163,7 +186,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btonLogin;
+    private javax.swing.JButton btonIniciarSesion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

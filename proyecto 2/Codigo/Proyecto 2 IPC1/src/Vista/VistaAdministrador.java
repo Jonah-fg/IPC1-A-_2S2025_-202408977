@@ -4,6 +4,9 @@
  */
 package Vista;
 
+import Vista.VistaCreacionProductos;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author hola k hace
@@ -18,6 +21,14 @@ public class VistaAdministrador extends javax.swing.JFrame {
     public VistaAdministrador() {
         initComponents();
     }
+    
+    public javax.swing.JButton getBtonCrear_ProductosMA(){
+        return btonCrear_ProductosMA;
+    }    
+    
+    public javax.swing.JButton getBtonActualizar_ProductosMA(){
+        return btonActualizar_productosMA;
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -284,7 +295,8 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btonCrear_vendedoresMAActionPerformed
 
     private void btonCrear_ProductosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCrear_ProductosMAActionPerformed
-        // TODO add your handling code here:
+        VistaCreacionProductos crearVista=new VistaCreacionProductos();
+        crearVista.setVisible(true);
     }//GEN-LAST:event_btonCrear_ProductosMAActionPerformed
 
     private void btonGenerarReportes_MAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonGenerarReportes_MAActionPerformed

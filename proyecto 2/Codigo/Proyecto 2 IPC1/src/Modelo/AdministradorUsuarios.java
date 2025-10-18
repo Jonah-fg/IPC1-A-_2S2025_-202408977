@@ -83,11 +83,48 @@ public class AdministradorUsuarios{
         return false;   
     }
     
-    public Usuario[] obtenerTodosUsuarios() {
+    public Usuario[] obtenerTodosUsuarios(){
         Usuario[] todosUsuarios = new Usuario[contadorUsuarios];
-        for (int i = 0; i < contadorUsuarios; i++) {
-            todosUsuarios[i] = usuarios[i];
+        for (int i=0; i<contadorUsuarios; i++){
+            todosUsuarios[i] =usuarios[i];
         }
         return todosUsuarios;
     }
+    
+    public Vendedor[] getVendedores(){
+        int contadorVendedores = 0;
+        for (int i =0; i <contadorVendedores; i++){
+            if (usuarios[i] instanceof Vendedor){
+                contadorVendedores++;
+            }
+        }
+        Vendedor[] vendedores=new Vendedor[contadorVendedores];
+        int iterador = 0;
+        for (int i = 0; i <contadorUsuarios; i++){
+            if(usuarios[i] instanceof Vendedor){
+                vendedores[iterador]=(Vendedor) usuarios[i];
+                iterador++;
+            }
+        }
+        return vendedores;
+    }
+    
+    public Cliente[] getClientes(){
+        int contadorClientes = 0;
+        for (int i =0; i<contadorUsuarios;i++){
+            if(usuarios[i] instanceof Cliente){
+                contadorClientes++;
+            }
+        }
+        Cliente[] clientes=new Cliente[contadorClientes];
+        int iterador =0;
+        for (int i= 0; i <contadorUsuarios;i++){
+            if(usuarios[i] instanceof Cliente){
+                clientes[iterador] =(Cliente) usuarios[i];
+                iterador++;
+            }
+        }
+        return clientes;
+    }
+    
 }

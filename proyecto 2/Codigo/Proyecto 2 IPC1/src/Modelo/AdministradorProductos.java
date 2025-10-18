@@ -5,7 +5,7 @@ public class AdministradorProductos{
     private int MAX;
     private int contadorProductos;
 
-    public AdministradorProductos(Productos[] productos, int MAX, int contadorProductos){
+    public AdministradorProductos(){
         this.MAX = 100;
         this.productos = new Productos[MAX];
         this.contadorProductos = contadorProductos;
