@@ -5,13 +5,13 @@
 package Vista;
 
 import Vista.VistaCreacionProductos;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author hola k hace
  */
 public class VistaAdministrador extends javax.swing.JFrame {
+    private Controlador.controladorAdministrador controlador; 
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaAdministrador.class.getName());
 
@@ -20,8 +20,37 @@ public class VistaAdministrador extends javax.swing.JFrame {
      */
     public VistaAdministrador() {
         initComponents();
+        this.controlador = new Controlador.controladorAdministrador(this);
     }
     
+    public javax.swing.JButton getBtonCrearVendedoresMA() {
+        return btonCrear_vendedoresMA;
+    }
+
+    public javax.swing.JButton getBtonActualizarVendedoresMA() {
+        return btonActualizar_vendedoresMA;
+    }
+
+    public javax.swing.JButton getBtonEliminarVendedoresMA() {
+        return btonEliminar_vendedoresMA;
+    }
+
+    public javax.swing.JButton getBtonCargarVendedoresMA() {
+        return btonCargar_vendedoresMA;
+    }
+
+    public javax.swing.JButton getBtonEliminarProductosMA() {
+        return btonEliminar_productosMA;
+    }
+
+    public javax.swing.JButton getBtonActualizarProductosMA() {
+        return btonActualizar_productosMA;
+    }
+
+    public javax.swing.JButton getBtonCargarProductos() {
+        return btonCargar_productosMA;
+    }
+   
     public javax.swing.JButton getBtonCrear_ProductosMA(){
         return btonCrear_ProductosMA;
     }    
@@ -29,6 +58,9 @@ public class VistaAdministrador extends javax.swing.JFrame {
     public javax.swing.JButton getBtonActualizar_ProductosMA(){
         return btonActualizar_productosMA;
     } 
+    public javax.swing.JTable getTblProductosMA() {
+        return tblProductosMA;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -74,6 +106,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
         btonCargar_vendedoresMA.setText("Cargar");
 
         btonActualizar_vendedoresMA.setText("Actualizar");
+        btonActualizar_vendedoresMA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonActualizar_vendedoresMAActionPerformed(evt);
+            }
+        });
 
         btonEliminar_vendedoresMA.setText("Eliminar");
 
@@ -159,8 +196,18 @@ public class VistaAdministrador extends javax.swing.JFrame {
         });
 
         btonEliminar_productosMA.setText("Eliminar");
+        btonEliminar_productosMA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonEliminar_productosMAActionPerformed(evt);
+            }
+        });
 
         btonActualizar_productosMA.setText("Actualizar");
+        btonActualizar_productosMA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonActualizar_productosMAActionPerformed(evt);
+            }
+        });
 
         btonCargar_productosMA.setText("Cargar");
 
@@ -296,12 +343,29 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
     private void btonCrear_ProductosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCrear_ProductosMAActionPerformed
         VistaCreacionProductos crearVista=new VistaCreacionProductos();
-        crearVista.setVisible(true);
     }//GEN-LAST:event_btonCrear_ProductosMAActionPerformed
 
     private void btonGenerarReportes_MAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonGenerarReportes_MAActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btonGenerarReportes_MAActionPerformed
+
+    private void btonActualizar_vendedoresMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonActualizar_vendedoresMAActionPerformed
+
+    }//GEN-LAST:event_btonActualizar_vendedoresMAActionPerformed
+
+    private void btonActualizar_productosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonActualizar_productosMAActionPerformed
+         VistaActualizarProducto actualizarProducto=new VistaActualizarProducto();
+         actualizarProducto.setLocationRelativeTo(this);
+         actualizarProducto.setControlador(this.controlador);
+         actualizarProducto.setVisible(true);
+    }//GEN-LAST:event_btonActualizar_productosMAActionPerformed
+
+    private void btonEliminar_productosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonEliminar_productosMAActionPerformed
+        VistaEliminarProducto eliminarProducto=new VistaEliminarProducto();
+        eliminarProducto.setLocationRelativeTo(this);
+        eliminarProducto.setControlador(this.controlador);
+        eliminarProducto.setVisible(true);
+    }//GEN-LAST:event_btonEliminar_productosMAActionPerformed
 
     /**
      * @param args the command line arguments

@@ -42,6 +42,11 @@ public class Productos {
     public void setStock(int Stock) {
         this.stock = Stock;
     }
+
+    public void setNombreProducto(String nombreProducto) {
+        this.nombreProducto = nombreProducto;
+    }
+    
     
     public void agregarStock(int cantidadStock){
         this.stock+=cantidadStock;

@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.controladorAdministrador;
+import javax.swing.JOptionPane;
 import javax.swing.JToggleButton;
 
 /**
@@ -11,6 +13,7 @@ import javax.swing.JToggleButton;
  * @author hola k hace
  */
 public class VistaCreacionProductos extends javax.swing.JFrame {
+    private Controlador.controladorAdministrador controlador;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaCreacionProductos.class.getName());
 
@@ -25,20 +28,24 @@ public class VistaCreacionProductos extends javax.swing.JFrame {
         return btonCrear;
     }
     
-    public String getCodigo(){ 
+    public String getTxtCodigo(){ 
         return txtCodigo.getText(); 
     }
     
-    public String getNombre(){ 
+    public String getTxtNombre(){ 
         return txtNombre.getText(); 
     }
     
-    public String getCategoria(){ 
+    public String getComboCategoria(){ 
         return comboCategoria.getSelectedItem().toString(); 
     }
     
-    public String getAtributo(){ 
+    public String getTxtAtributo(){ 
         return txtAtributoEspecial.getText(); 
+    }
+
+    public void setControlador(Controlador.controladorAdministrador controlador) {
+        this.controlador = controlador;
     }
 
     /**
@@ -83,7 +90,13 @@ public class VistaCreacionProductos extends javax.swing.JFrame {
             }
         });
 
-        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNombreActionPerformed(evt);
+            }
+        });
+
+        comboCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Tecnología", "Alimenticio", "Generales", " " }));
 
         btonCrear.setText("Crear");
         btonCrear.addActionListener(new java.awt.event.ActionListener() {
@@ -159,8 +172,14 @@ public class VistaCreacionProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_txtAtributoEspecialActionPerformed
 
     private void btonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCrearActionPerformed
-        // TODO add your handling code here:
+        if(controlador != null){
+            controlador.crearProductoDesdeVentana(this);
+        }
     }//GEN-LAST:event_btonCrearActionPerformed
+
+    private void txtNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNombreActionPerformed
 
     /**
      * @param args the command line arguments

@@ -152,6 +152,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Actualizar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btonActualizar_vendedoresMAActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btonEliminar_vendedoresMA">
                   <Properties>
@@ -305,11 +308,17 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Eliminar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btonEliminar_productosMAActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btonActualizar_productosMA">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Actualizar"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btonActualizar_productosMAActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="btonCargar_productosMA">
                   <Properties>

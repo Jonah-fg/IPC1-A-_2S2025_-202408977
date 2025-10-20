@@ -62,7 +62,7 @@ public class AdministradorUsuarios{
     }
     
     public boolean eliminarUsuario(String codigo) {
-        for (int i = 0; i < contadorUsuarios; i++) {
+        for (int i = 0; i <contadorUsuarios; i++) {
             if (usuarios[i].getCodigo().equals(codigo)) {
                 for (int j = i; j < contadorUsuarios - 1; j++) {
                     usuarios[j] = usuarios[j + 1];

@@ -76,8 +76,6 @@ public class VistaInicioSesion extends javax.swing.JFrame {
             }
         });
 
-        txtContraseña.setText("jPasswordField1");
-
         btonIniciarSesion.setText("Iniciar Sesion");
         btonIniciarSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,6 +102,9 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(btonIniciarSesion))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addComponent(jLabel4))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,10 +113,7 @@ public class VistaInicioSesion extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
-                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel4)))
+                            .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(

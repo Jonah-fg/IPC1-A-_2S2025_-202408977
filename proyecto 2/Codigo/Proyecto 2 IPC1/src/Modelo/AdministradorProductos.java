@@ -8,7 +8,7 @@ public class AdministradorProductos{
     public AdministradorProductos(){
         this.MAX = 100;
         this.productos = new Productos[MAX];
-        this.contadorProductos = contadorProductos;
+        this.contadorProductos = 0;
         crearProductos(new ProductosTecnologicos("Laptop Gamng", "P001", 5000.00, 24));
         
         crearProductos(new ProductosAlimenticios("Jamon", "P002", 10.00, "15/12/2024"));
@@ -34,7 +34,7 @@ public class AdministradorProductos{
     }
     
     public boolean eliminarProducto(String codigo){
-        for (int i = 0; i < contadorProductos; i++){
+        for (int i = 0; i < contadorProductos;i++){
             if (productos[i].getCodigoProducto().equals(codigo)){
                 for (int j = i; j < contadorProductos - 1; j++){
                     productos[j] = productos[j + 1];
