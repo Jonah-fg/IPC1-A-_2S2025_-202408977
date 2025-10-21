@@ -5,6 +5,7 @@
 package Vista;
 
 import Vista.VistaCreacionProductos;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,13 @@ public class VistaAdministrador extends javax.swing.JFrame {
      */
     public VistaAdministrador() {
         initComponents();
-        this.controlador = new Controlador.controladorAdministrador(this);
+        btonCerrarSesion = new javax.swing.JButton();
+        btonCerrarSesion.setText("Cerrar Sesión");
+        btonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+        btonCerrarSesionActionPerformed(evt);
+        }
+    });
     }
     
     public javax.swing.JButton getBtonCrearVendedoresMA() {
@@ -58,6 +65,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
     public javax.swing.JButton getBtonActualizar_ProductosMA(){
         return btonActualizar_productosMA;
     } 
+
+    public javax.swing.JTable getTblVendedoresMA() {
+        return tblVendedoresMA;  
+    }
+    
     public javax.swing.JTable getTblProductosMA() {
         return tblProductosMA;
     }
@@ -92,7 +104,7 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         btonGenerarReportes_MA = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        btonCerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -113,6 +125,11 @@ public class VistaAdministrador extends javax.swing.JFrame {
         });
 
         btonEliminar_vendedoresMA.setText("Eliminar");
+        btonEliminar_vendedoresMA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonEliminar_vendedoresMAActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -306,43 +323,48 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         jLabel1.setText("Modulo Administrador");
 
-        jLabel2.setText("jLabel2");
+        btonCerrarSesion.setText("Cerrar Sesion");
+        btonCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonCerrarSesionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(280, 280, 280))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 668, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btonCerrarSesion))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addGap(21, 21, 21)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btonCerrarSesion)
+                .addGap(18, 18, 18)
                 .addComponent(vendedores, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btonCrear_vendedoresMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCrear_vendedoresMAActionPerformed
-        // TODO add your handling code here:
+      // TODO add your handling code here:
     }//GEN-LAST:event_btonCrear_vendedoresMAActionPerformed
 
     private void btonCrear_ProductosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCrear_ProductosMAActionPerformed
-        VistaCreacionProductos crearVista=new VistaCreacionProductos();
+    
     }//GEN-LAST:event_btonCrear_ProductosMAActionPerformed
 
     private void btonGenerarReportes_MAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonGenerarReportes_MAActionPerformed
@@ -350,22 +372,29 @@ public class VistaAdministrador extends javax.swing.JFrame {
     }//GEN-LAST:event_btonGenerarReportes_MAActionPerformed
 
     private void btonActualizar_vendedoresMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonActualizar_vendedoresMAActionPerformed
-
+        
     }//GEN-LAST:event_btonActualizar_vendedoresMAActionPerformed
 
     private void btonActualizar_productosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonActualizar_productosMAActionPerformed
-         VistaActualizarProducto actualizarProducto=new VistaActualizarProducto();
-         actualizarProducto.setLocationRelativeTo(this);
-         actualizarProducto.setControlador(this.controlador);
-         actualizarProducto.setVisible(true);
+  
     }//GEN-LAST:event_btonActualizar_productosMAActionPerformed
 
     private void btonEliminar_productosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonEliminar_productosMAActionPerformed
-        VistaEliminarProducto eliminarProducto=new VistaEliminarProducto();
-        eliminarProducto.setLocationRelativeTo(this);
-        eliminarProducto.setControlador(this.controlador);
-        eliminarProducto.setVisible(true);
+
     }//GEN-LAST:event_btonEliminar_productosMAActionPerformed
+
+    private void btonEliminar_vendedoresMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonEliminar_vendedoresMAActionPerformed
+        
+    }//GEN-LAST:event_btonEliminar_vendedoresMAActionPerformed
+
+    private void btonCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCerrarSesionActionPerformed
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Está seguro que desea cerrar sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(confirmacion==JOptionPane.YES_OPTION){
+            this.dispose(); 
+            VistaInicioSesion vistaInicio=new VistaInicioSesion();
+            vistaInicio.setVisible(true);
+        }
+    }//GEN-LAST:event_btonCerrarSesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -397,13 +426,13 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton btonActualizar_vendedoresMA;
     private javax.swing.JButton btonCargar_productosMA;
     private javax.swing.JButton btonCargar_vendedoresMA;
+    private javax.swing.JButton btonCerrarSesion;
     private javax.swing.JButton btonCrear_ProductosMA;
     private javax.swing.JButton btonCrear_vendedoresMA;
     private javax.swing.JButton btonEliminar_productosMA;
     private javax.swing.JButton btonEliminar_vendedoresMA;
     private javax.swing.JToggleButton btonGenerarReportes_MA;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

@@ -3,8 +3,8 @@ package Modelo;
 public class Vendedor extends Usuario {
     private int ventasConfirmadas;
 
-    public Vendedor(String nombre, String codigo, String genero, String contaseña) {
-        super(nombre, codigo, genero, contaseña);
+    public Vendedor(String nombre, String codigo, String genero, String contraseña) {
+        super(nombre, codigo, genero, contraseña);
         this.ventasConfirmadas=0;
     }
 

@@ -4,6 +4,8 @@
  */
 package Vista;
 
+import Controlador.ControladorIniciarSesion;
+import Modelo.AdministradorUsuarios;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +22,17 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     public VistaInicioSesion() {
         initComponents();
     }
-
+     public javax.swing.JButton getBtonIniciarSesion() {
+        return btonIniciarSesion;
+    }
+    
+    public String getTxtCodigo() {
+        return txtCodigo.getText();
+    }
+    
+    public String getTxtContraseña() {
+        return new String(txtContraseña.getPassword());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -143,19 +155,15 @@ public class VistaInicioSesion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCodigoActionPerformed
 
     private void btonIniciarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonIniciarSesionActionPerformed
-        String codigo = txtCodigo.getText();
-        String contraseña = new String(txtContraseña.getPassword());
-
-        if (codigo.equals("admin") && contraseña.equals("IPC1A")){
-            this.dispose();
-            VistaAdministrador vistaAdmin=new VistaAdministrador();
-            vistaAdmin.setVisible(true);
-        
-        }
+        String codigo=txtCodigo.getText();
+        String contraseña=new String(txtContraseña.getPassword());
+        AdministradorUsuarios adminUsuarios=new AdministradorUsuarios();
+        ControladorIniciarSesion controladorLogin= new Controlador.ControladorIniciarSesion(this, adminUsuarios);
+        if (controladorLogin.IniciarSesion(codigo, contraseña)) {      
+        } 
         else{
-            JOptionPane.showMessageDialog(this,"Código o contraseña incorrectas");
+            JOptionPane.showMessageDialog(this, "Código o contraseña incorrectas");
         }
-
     }//GEN-LAST:event_btonIniciarSesionActionPerformed
 
     /**

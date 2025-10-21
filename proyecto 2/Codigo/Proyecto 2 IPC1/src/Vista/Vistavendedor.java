@@ -4,20 +4,54 @@
  */
 package Vista;
 
+import javax.swing.JTable;
+import javax.swing.JToggleButton;
+
 /**
  *
  * @author hola k hace
  */
-public class Vistavendedor extends javax.swing.JFrame {
+public class VistaVendedor extends javax.swing.JFrame {
     
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Vistavendedor.class.getName());
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaVendedor.class.getName());
 
     /**
      * Creates new form Vistavendedor
      */
-    public Vistavendedor() {
+    public VistaVendedor() {
         initComponents();
     }
+    
+    public javax.swing.JTable getTblProductosMV() {
+        return tblProductosMV; 
+    }
+
+    public JToggleButton getBtonAgregarStock_ProductosMV() {
+        return btonAgregarStock_ProductosMV; 
+    }
+
+// ✅ GETTERS PARA LA PESTAÑA CLIENTES (para después)
+    public javax.swing.JTable getTblClientesMV() {
+        return tblClientesMV;
+    }
+
+    public javax.swing.JButton getBtonCrear_Clientes() {
+        return btonCrear_ClientesMV;
+    }
+
+    public javax.swing.JButton getBtonActualizarCliente() {
+        return btonActualizar_ClientesMV;
+    }
+
+    public javax.swing.JButton getBtonEliminarCliente() {
+        return btonEliminar_ClientesMV;
+    }
+
+// ✅ GETTERS PARA LA PESTAÑA PEDIDOS (para después)
+    public javax.swing.JTable getTblPedidosMV() {
+        return tblPedidosMV;
+    }
+      
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -32,7 +66,7 @@ public class Vistavendedor extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductosVendedor = new javax.swing.JTable();
+        tblProductosMV = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btonAgregarStock_ProductosMV = new javax.swing.JToggleButton();
         botnCargar_productosMV = new javax.swing.JToggleButton();
@@ -40,10 +74,10 @@ public class Vistavendedor extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tblClientesMV = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        btonCrear_ClientesMV = new javax.swing.JToggleButton();
-        btonCargar_ClientesMV = new javax.swing.JToggleButton();
-        btonActualizar_ClientesMV = new javax.swing.JToggleButton();
-        btonEliminar_ClientesMV = new javax.swing.JToggleButton();
+        btonCrear_ClientesMV = new javax.swing.JButton();
+        btonCargar_ClientesMV = new javax.swing.JButton();
+        btonActualizar_ClientesMV = new javax.swing.JButton();
+        btonEliminar_ClientesMV = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPedidosMV = new javax.swing.JTable();
@@ -56,7 +90,7 @@ public class Vistavendedor extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Modulo vendedor");
 
-        tblProductosVendedor.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductosMV.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -68,8 +102,8 @@ public class Vistavendedor extends javax.swing.JFrame {
                 "Codigo", "Nombre", "Categoria", "Stock", "Acciones"
             }
         ));
-        tblProductosVendedor.setRowHeight(40);
-        jScrollPane1.setViewportView(tblProductosVendedor);
+        tblProductosMV.setRowHeight(40);
+        jScrollPane1.setViewportView(tblProductosMV);
 
         btonAgregarStock_ProductosMV.setText("Agregar Stock");
         btonAgregarStock_ProductosMV.addActionListener(new java.awt.event.ActionListener() {
@@ -148,13 +182,13 @@ public class Vistavendedor extends javax.swing.JFrame {
         btonCargar_ClientesMV.setText("Cargar");
 
         btonActualizar_ClientesMV.setText("Actualizar");
-        btonActualizar_ClientesMV.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btonActualizar_ClientesMVActionPerformed(evt);
-            }
-        });
 
         btonEliminar_ClientesMV.setText("Eliminar");
+        btonEliminar_ClientesMV.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonEliminar_ClientesMVActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -163,22 +197,22 @@ public class Vistavendedor extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btonEliminar_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btonActualizar_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btonCrear_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btonCargar_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btonCrear_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btonActualizar_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btonEliminar_ClientesMV, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(32, 32, 32)
-                .addComponent(btonCrear_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(btonCargar_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btonActualizar_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
+                .addGap(40, 40, 40)
+                .addComponent(btonCrear_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(btonCargar_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btonActualizar_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
                 .addComponent(btonEliminar_ClientesMV, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -273,9 +307,9 @@ public class Vistavendedor extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_botnCargar_productosMVActionPerformed
 
-    private void btonActualizar_ClientesMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonActualizar_ClientesMVActionPerformed
-         // TODO add your handling code here:
-    }//GEN-LAST:event_btonActualizar_ClientesMVActionPerformed
+    private void btonEliminar_ClientesMVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonEliminar_ClientesMVActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btonEliminar_ClientesMVActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,16 +333,16 @@ public class Vistavendedor extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Vistavendedor().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new VistaVendedor().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JToggleButton botnCargar_productosMV;
-    private javax.swing.JToggleButton btonActualizar_ClientesMV;
+    private javax.swing.JButton btonActualizar_ClientesMV;
     private javax.swing.JToggleButton btonAgregarStock_ProductosMV;
-    private javax.swing.JToggleButton btonCargar_ClientesMV;
-    private javax.swing.JToggleButton btonCrear_ClientesMV;
-    private javax.swing.JToggleButton btonEliminar_ClientesMV;
+    private javax.swing.JButton btonCargar_ClientesMV;
+    private javax.swing.JButton btonCrear_ClientesMV;
+    private javax.swing.JButton btonEliminar_ClientesMV;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -321,6 +355,6 @@ public class Vistavendedor extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable tblClientesMV;
     private javax.swing.JTable tblPedidosMV;
-    private javax.swing.JTable tblProductosVendedor;
+    private javax.swing.JTable tblProductosMV;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,31 +1,43 @@
 package Controlador;
 
 import Modelo.AdministradorProductos;
+import Modelo.AdministradorUsuarios;
 import Modelo.Productos;
 import Modelo.ProductosAlimenticios;
 import Modelo.ProductosGenerales;
 import Modelo.ProductosTecnologicos;
+import Modelo.Usuario;
+import Modelo.Vendedor;
 import Vista.VistaActualizarProducto;
+import Vista.VistaActualizarVendedor;
 import Vista.VistaAdministrador;
 import Vista.VistaCreacionProductos;
+import Vista.VistaCrearVendedor;
 import Vista.VistaEliminarProducto;
+import Vista.VistaEliminarVendedor;
 import javax.swing.JOptionPane;
 
 public class controladorAdministrador {
     private VistaAdministrador vista;
     private AdministradorProductos adminProductos;
+    private AdministradorUsuarios adminUsuarios;
 
     public controladorAdministrador(VistaAdministrador vista){
         this.adminProductos = new AdministradorProductos();
         this.vista = vista; 
+        this.adminUsuarios = new AdministradorUsuarios();
         if(vista!= null){   
            configurarEventos();
+           actualizarTablaVendedores();
            cargarProductosTabla(); 
         }
     }
     
     private void configurarEventos(){
         vista.getBtonCrear_ProductosMA().addActionListener(e -> abrirVentanaCrearProducto());
+        vista.getBtonCrearVendedoresMA().addActionListener(e -> abrirVentanaCrearVendedor());
+        vista.getBtonActualizarVendedoresMA().addActionListener(e -> abrirVentanaActualizarVendedor());
+        vista.getBtonEliminarVendedoresMA().addActionListener(e -> abrirVentanaEliminarVendedor());
     }
     
     public boolean crearProducto(String nombre, String codigo, String categoria, double precio, String atributoEspecial){  
@@ -92,7 +104,8 @@ public class controladorAdministrador {
         vistaCreacion.setVisible(true);
         vistaCreacion.setControlador(this);
     }
-    //--------------------------------------------------------------------------------------------------+
+  
+ //--------------------------------------------------------------------------------------------------+
     
     public boolean actualizarProducto(String codigo, String nuevoNombre, String nuevoAtributo){
         try{
@@ -141,10 +154,10 @@ public class controladorAdministrador {
         }
         
     } 
-    catch (Exception e) {
-        JOptionPane.showMessageDialog(ventana, "Error: " + e.getMessage());
+    catch (Exception e){
+        JOptionPane.showMessageDialog(ventana,"Error: "+ e.getMessage());
     }
-    }
+   }
 
  //--------------------------------------------------------------------------------------------------------
     
@@ -195,8 +208,8 @@ public class controladorAdministrador {
         }
     
         String detalle = "Detalle del Producto\n\n";
-        detalle += "Código: "+ producto.getCodigoProducto() + "\n";
-        detalle += "Nombre: "+producto.getNombreProducto() + "\n";
+        detalle +="Código: "+ producto.getCodigoProducto() + "\n";
+        detalle +="Nombre: "+producto.getNombreProducto() + "\n";
         detalle += "Categoría: "+producto.getCategoria() + "\n";
         
         if(producto instanceof ProductosTecnologicos){
@@ -205,7 +218,7 @@ public class controladorAdministrador {
         } 
         else if(producto instanceof ProductosAlimenticios){
             String fechaCaducidad=((ProductosAlimenticios) producto).getFechaCaducidad();
-            detalle+="Fecha de caducidad: " + fechaCaducidad;
+            detalle+="Fecha de caducidad: " +fechaCaducidad;
         } 
         else if(producto instanceof ProductosGenerales) {
             String material=((ProductosGenerales) producto).getMaterialProducto();
@@ -216,6 +229,171 @@ public class controladorAdministrador {
      
 //----------------------------------------------------------------------------------------------
     
+    public boolean crearVendedor(String codigo, String nombre, String genero, String contraseña) {
+        try{
+            Vendedor nuevoVendedor=new Modelo.Vendedor(nombre, codigo, genero, contraseña);
+            return adminUsuarios.crearUsuario(nuevoVendedor);
+        }
+        catch (Exception e) {
+            System.out.println("Error al crear vendedor: " + e.getMessage());
+            return false;
+        }
+    }
+    
+    public void crearVendedorDesdeVentana(VistaCrearVendedor ventana){
+        try{
+            String codigo=ventana.getTxtCodigoVendedor();
+            String nombre=ventana.getTxtNombreVendedor();
+            String genero=ventana.getComboGenero();
+            String contraseña=ventana.getTxtContraseñaVendedor();        
+            if(codigo.isEmpty()||nombre.isEmpty() || contraseña.isEmpty()){
+                JOptionPane.showMessageDialog(ventana,"Todos los campos son obligatorios");
+                return;
+            }
+        
+            boolean exito=crearVendedor(codigo, nombre, genero, contraseña);     
+            if (exito){
+                JOptionPane.showMessageDialog(ventana,"Vendedor creado exitosamente");
+                ventana.dispose();
+                actualizarTablaVendedores(); 
+            }
+            else{
+                JOptionPane.showMessageDialog(ventana,"Error: Código ya existe o datos inválidos");
+            }
+        
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(ventana, "Error en los datos: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    private void actualizarTablaVendedores(){
+        try{
+            Vendedor[] vendedores=adminUsuarios.getVendedores();
+            javax.swing.JTable tabla= vista.getTblVendedoresMA();
+            javax.swing.table.DefaultTableModel modelo=(javax.swing.table.DefaultTableModel)tabla.getModel();
+            modelo.setRowCount(0);
+        
+            for(Modelo.Vendedor vendedor : vendedores){
+                Object[] fila={vendedor.getCodigo(),vendedor.getNombre(),vendedor.getGenero(),vendedor.getVentasConfirmadas() };
+                modelo.addRow(fila);
+            }
+        } 
+        catch (Exception e){
+            System.out.println("Error al cargar vendedores en tabla: " + e.getMessage());
+        }
+    }
+    
+    public void abrirVentanaCrearVendedor(){
+        VistaCrearVendedor vistaCrear=new VistaCrearVendedor();
+        vistaCrear.setLocationRelativeTo(vista);
+        vistaCrear.setControlador(this);
+        vistaCrear.setVisible(true);
+    }
+    
+//-----------------------------------------------------------------------------------------------------------
+
+    public Vendedor buscarVendedor(String codigo){
+        try{
+            Usuario usuario=adminUsuarios.buscarUsuarioCodigo(codigo);
+            if(usuario instanceof Vendedor){
+                return (Vendedor) usuario;
+            }
+        } 
+        catch (Exception e){
+        }
+      return null;
+    }
+    
+    public boolean actualizarVendedor(String codigo, String nuevoNombre,String nuevaContraseña){
+        try{
+            return adminUsuarios.actualizarUsuario(nuevoNombre, codigo, nuevaContraseña);
+        } 
+        catch (Exception e){
+            return false;
+        }
+    }
+    
+    public void actualizarVendedorDesdeVentana(VistaActualizarVendedor ventana) {
+        try{
+            String codigo= ventana.getTxtCodigoBuscar();
+            String nuevoNombre=ventana.getTxtNuevoNombre();
+            String nuevaContraseña =ventana.getTxtNuevaContraseña();      
+            if(codigo.isEmpty()|| nuevoNombre.isEmpty()||nuevaContraseña.isEmpty()){
+                JOptionPane.showMessageDialog(ventana, "Todos los campos son obligatoros");
+                return;
+            }
+            boolean exito=actualizarVendedor(codigo,nuevoNombre,nuevaContraseña);  
+            if (exito){
+                JOptionPane.showMessageDialog(ventana,"Vendedor actualizao exitosamente");
+                ventana.dispose();
+                actualizarTablaVendedores();
+            }
+            else{
+                JOptionPane.showMessageDialog(ventana,"Error:Vendedor no enconrado o datos inválidos");
+            }
+        
+        } 
+        catch (Exception e){
+            JOptionPane.showMessageDialog(ventana,"Error: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    public void abrirVentanaActualizarVendedor(){
+        VistaActualizarVendedor vistaActualizar=new VistaActualizarVendedor();
+        vistaActualizar.setLocationRelativeTo(vista);
+        vistaActualizar.setControlador(this);
+        vistaActualizar.setVisible(true);
+    }
+
+//--------------------------------------------------------------------------------------------------------------
+    
+    public boolean eliminarVendedor(String codigo) {
+        try{
+            return adminUsuarios.eliminarUsuario(codigo);
+        }
+        catch(Exception e){
+            return false;
+        }
+    }
+    
+    public void eliminarVendedorDesdeVentana(VistaEliminarVendedor ventana) {
+        try{
+            String codigo =ventana.getTxtCodigoEliminar();
+            if(codigo.isEmpty()){
+                JOptionPane.showMessageDialog(ventana, "Debes ingresar un código obligatorio :(");
+                return;
+            }
+            int confirmacion=JOptionPane.showConfirmDialog(ventana,"¿Está seguro de eliminar al vendedor "+ codigo+ "?","Confirmar Eliminación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion==JOptionPane.YES_OPTION){
+                boolean exito=eliminarVendedor(codigo);    
+                if (exito){
+                    JOptionPane.showMessageDialog(ventana,"Vendedor eliminado exitosamente");
+                    ventana.dispose();
+                    actualizarTablaVendedores();
+                } 
+                else{
+                    JOptionPane.showMessageDialog(ventana,"Error: El Vendedor no encontrado");
+                }
+            }
+        
+        } 
+        catch (Exception e){
+        JOptionPane.showMessageDialog(ventana, "Error: " + e.getMessage());
+        }
+    }
+    
+    public void abrirVentanaEliminarVendedor() {
+        VistaEliminarVendedor vistaEliminar=new VistaEliminarVendedor();
+        vistaEliminar.setLocationRelativeTo(vista);
+        vistaEliminar.setControlador(this);
+        vistaEliminar.setVisible(true);
+    }
+    
+//---------------------------------------------------------------------------------------------------------------
+    
     private void cargarProductosTabla(){
         try{
             Productos[] productos=adminProductos.obtenerTodosProductos();   
@@ -224,7 +402,7 @@ public class controladorAdministrador {
             modelo.setRowCount(0);
         
             for(Productos producto:productos){
-                Object[] fila={producto.getCodigoProducto(),producto.getNombreProducto(), producto.getCategoria(), "Ver detalles"};
+                Object[] fila={producto.getCodigoProducto(),producto.getNombreProducto(), producto.getCategoria(),"Ver detalles"};
                 modelo.addRow(fila);
            }   
         } 

@@ -29,13 +29,7 @@ public class AdministradorUsuarios{
         }
         return false;
     }
-    
-    private void administradorDefecto(){
-        Administrador admin=new Administrador("Admin", "admin", "M", "IPC1A");
-        crearUsuario(admin);
-    }
-    
-    
+       
     public boolean crearUsuario (String nombre, String codigo, String genero, String contraseña){
         Usuario usuario = new Usuario(nombre, codigo, genero, contraseña);
         return crearUsuario(usuario);
@@ -93,7 +87,7 @@ public class AdministradorUsuarios{
     
     public Vendedor[] getVendedores(){
         int contadorVendedores = 0;
-        for (int i =0; i <contadorVendedores; i++){
+        for (int i =0; i <contadorUsuarios; i++){ //XD
             if (usuarios[i] instanceof Vendedor){
                 contadorVendedores++;
             }
