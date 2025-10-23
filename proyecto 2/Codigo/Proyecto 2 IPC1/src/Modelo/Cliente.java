@@ -4,7 +4,7 @@ package Modelo;
 public class Cliente extends Usuario{
     private String cumpleañosCliente;
     
-    public Cliente(String nombre, String codigo, String genero, String contaseña, String CumpleañosCliente) {
+    public Cliente(String nombre, String codigo, String genero, String contaseña, String cumpleañosCliente) {
         super(nombre, codigo, genero, contaseña);
         this.cumpleañosCliente=cumpleañosCliente;
     }

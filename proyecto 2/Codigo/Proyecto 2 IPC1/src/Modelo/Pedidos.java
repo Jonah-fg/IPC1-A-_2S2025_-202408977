@@ -1,7 +1,10 @@
 
 package Modelo;
 
-public class Pedidos {
+import java.io.Serializable;
+
+public class Pedidos implements Serializable{
+    private static final long serialVersionUID = 1L;
     private String codigoPedido;
     private String codigoCliente;
     private String nombreCliente;

@@ -1,7 +1,10 @@
 
 package Modelo;
 
-public class ProductosTecnologicos extends Productos{
+import java.io.Serializable;
+
+public class ProductosTecnologicos extends Productos implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int mesesGarantia;
     
     public ProductosTecnologicos(String nombreProducto, String codigoProducto, double precio, int mesesGarantia) {

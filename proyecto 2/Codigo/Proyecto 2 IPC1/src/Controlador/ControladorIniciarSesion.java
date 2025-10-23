@@ -36,13 +36,13 @@ public class ControladorIniciarSesion {
         }
         else if(usuario instanceof Vendedor){
             VistaVendedor vistaVendedor = new VistaVendedor();
-            ControladorVendedor controladorVendedor = new ControladorVendedor(vistaVendedor, (Vendedor)usuario);
+            ControladorVendedor controladorVendedor=new ControladorVendedor(vistaVendedor, (Vendedor)usuario);
             vistaVendedor.setVisible(true);
         }
     }    
     
     public boolean IniciarSesion(String codigo, String contraseña){
-         Usuario usuario = administrador.buscarUsuarioCodigo(codigo);
+         Usuario usuario=administrador.buscarUsuarioCodigo(codigo);
         if(usuario!=null&& usuario.getContraseña().equals(contraseña)){
             redireccionSegunUsuario(usuario);
             return true;

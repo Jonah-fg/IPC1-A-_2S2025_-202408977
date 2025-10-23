@@ -1,6 +1,9 @@
 package Modelo;
 
-public class Vendedor extends Usuario {
+import java.io.Serializable;
+
+public class Vendedor extends Usuario implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int ventasConfirmadas;
 
     public Vendedor(String nombre, String codigo, String genero, String contraseña) {

@@ -1,7 +1,18 @@
 
 package Modelo;
 
-public class AdministradorUsuarios{
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
+
+public class AdministradorUsuarios implements Serializable{
+    private static final long serialVersionUID =1L;
+    private static final String Archivo_usuarios="usuarios.ser";
     private Usuario[] usuarios;
     private int contadorUsuarios;
     private int MAX;
@@ -10,6 +21,7 @@ public class AdministradorUsuarios{
         this.MAX = 100;
         this.usuarios = new Usuario[MAX];
         this.contadorUsuarios = 0;
+        cargarDesdeArchivo(); 
     }
     
     public Usuario buscarUsuarioCodigo(String codigo){
@@ -22,9 +34,10 @@ public class AdministradorUsuarios{
     }
     
     public boolean crearUsuario(Usuario usuario){
-        if (contadorUsuarios <MAX&& buscarUsuarioCodigo(usuario.getCodigo()) == null) {
+        if (contadorUsuarios<MAX && buscarUsuarioCodigo(usuario.getCodigo())== null) {
             usuarios[contadorUsuarios]= usuario;
             contadorUsuarios++;
+            guardarUsuariosEnArchivo();
             return true;
         }
         return false;
@@ -62,6 +75,7 @@ public class AdministradorUsuarios{
                     usuarios[j] = usuarios[j + 1];
                 }
                 contadorUsuarios--;
+                guardarUsuariosEnArchivo();
                 return true;
             }
         }
@@ -119,6 +133,40 @@ public class AdministradorUsuarios{
             }
         }
         return clientes;
+    }
+    
+    public void guardarUsuariosEnArchivo(){
+        try (ObjectOutputStream salida=new ObjectOutputStream(
+                new FileOutputStream(Archivo_usuarios))) {
+            
+            Usuario[] usuariosGuardar=new Usuario[contadorUsuarios];
+            for (int i=0; i<contadorUsuarios;i++){
+                usuariosGuardar[i] =usuarios[i];
+            }
+            
+            salida.writeObject(usuariosGuardar);
+            salida.writeInt(contadorUsuarios); 
+        } 
+        catch (IOException e){
+        }
+    }
+    
+    @SuppressWarnings("unchecked")
+    private void cargarDesdeArchivo() {
+        try(ObjectInputStream entrada=new ObjectInputStream(
+                new FileInputStream(Archivo_usuarios))) {
+            
+            Usuario[] usuariosCargados=(Usuario[]) entrada.readObject();
+            contadorUsuarios=entrada.readInt();          
+            for(int i=0;i<contadorUsuarios&& i<MAX; i++) {
+                usuarios[i] = usuariosCargados[i];
+            }
+        } 
+        catch (FileNotFoundException e){
+            System.out.println("Archivo no encontrado, se crea uno jajajaj");
+        }
+        catch (IOException | ClassNotFoundException e) {
+        }
     }
     
 }
