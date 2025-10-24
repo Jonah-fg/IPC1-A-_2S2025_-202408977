@@ -39,6 +39,11 @@ public class ControladorIniciarSesion {
             ControladorVendedor controladorVendedor=new ControladorVendedor(vistaVendedor, (Vendedor)usuario);
             vistaVendedor.setVisible(true);
         }
+        else if(usuario instanceof Cliente){
+        VistaCliente vistaCliente=new VistaCliente();
+        ControladorCliente controladorCliente=new ControladorCliente(vistaCliente,(Cliente)usuario);
+        vistaCliente.setVisible(true);
+        }
     }    
     
     public boolean IniciarSesion(String codigo, String contraseña){

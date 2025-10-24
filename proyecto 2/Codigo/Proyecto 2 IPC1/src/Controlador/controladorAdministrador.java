@@ -75,13 +75,14 @@ public class controladorAdministrador {
             String nombre=ventana.getTxtNombre();
             String categoria=ventana.getComboCategoria();
             String atributo=ventana.getTxtAtributo();
+            String precio=ventana.getTxtPrecioProducto();
             
             if(codigo.isEmpty()||nombre.isEmpty()||atributo.isEmpty()){
                 JOptionPane.showMessageDialog(ventana,"Todos los camps son obligatoros");
                 return;
             }
-            double precio=100.0;
-            boolean exito = crearProducto(nombre, codigo,categoria, precio,atributo);
+            double precioProducto=Double.parseDouble(precio);
+            boolean exito=crearProducto(nombre, codigo,categoria, precioProducto,atributo);
             if (exito){
                 JOptionPane.showMessageDialog(ventana,"Producto creado exitosamente");
                 ventana.dispose();

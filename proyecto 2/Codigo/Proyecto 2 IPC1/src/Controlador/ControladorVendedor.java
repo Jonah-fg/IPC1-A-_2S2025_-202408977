@@ -12,8 +12,6 @@ import Vista.VistaAgregarStock;
 import Vista.VistaCrearCliente;
 import Vista.VistaEliminarCliente;
 import Vista.VistaVendedor;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -59,6 +57,7 @@ public class ControladorVendedor{
             Productos producto=adminProductos.buscarProductoCodigo(codigoProducto);
             if (producto!= null){
                 producto.agregarStock(cantidad);
+                adminProductos.guardarEnArchivo();
                 return true;
             }
             return false;

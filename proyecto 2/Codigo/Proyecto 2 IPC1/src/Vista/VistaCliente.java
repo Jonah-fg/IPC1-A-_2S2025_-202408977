@@ -4,11 +4,15 @@
  */
 package Vista;
 
+import Controlador.ControladorCliente;
+import javax.swing.JTable;
+
 /**
  *
  * @author hola k hace
  */
 public class VistaCliente extends javax.swing.JFrame {
+    private ControladorCliente controlador;
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(VistaCliente.class.getName());
 
@@ -17,6 +21,22 @@ public class VistaCliente extends javax.swing.JFrame {
      */
     public VistaCliente() {
         initComponents();
+    }
+    
+    public void setControlador(ControladorCliente controlador) {
+        this.controlador =controlador;
+    }
+    
+    public javax.swing.JTable getTblProductosMC() {
+        return tblProductosMC;
+    }
+
+    public javax.swing.JTable getTblCarritoCompraMC() {
+        return tblCarritoCompraMC;
+    }
+    
+    public javax.swing.JButton getBtonRealizarPedido() {
+        return btonRealizarPedido;
     }
 
     /**
@@ -35,7 +55,9 @@ public class VistaCliente extends javax.swing.JFrame {
         tblProductosMC = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCarritoCompraMC = new javax.swing.JTable();
+        btonRealizarPedido = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblHistorialComprasMC = new javax.swing.JTable();
@@ -79,7 +101,7 @@ public class VistaCliente extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Productos", jPanel1);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCarritoCompraMC.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -90,23 +112,44 @@ public class VistaCliente extends javax.swing.JFrame {
                 "Codigo  Producto", "Nombre", "Cantidad ", "Precio", "Total", "Opciones"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tblCarritoCompraMC.setRowHeight(40);
+        jScrollPane2.setViewportView(tblCarritoCompraMC);
+
+        btonRealizarPedido.setText("Realizar Pedido");
+        btonRealizarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btonRealizarPedidoActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Total:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btonRealizarPedido)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 338, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btonRealizarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Carrito compra", jPanel2);
@@ -170,6 +213,10 @@ public class VistaCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btonRealizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonRealizarPedidoActionPerformed
+        
+    }//GEN-LAST:event_btonRealizarPedidoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -196,7 +243,9 @@ public class VistaCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btonRealizarPedido;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -204,7 +253,7 @@ public class VistaCliente extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblCarritoCompraMC;
     private javax.swing.JTable tblHistorialComprasMC;
     private javax.swing.JTable tblProductosMC;
     // End of variables declaration//GEN-END:variables

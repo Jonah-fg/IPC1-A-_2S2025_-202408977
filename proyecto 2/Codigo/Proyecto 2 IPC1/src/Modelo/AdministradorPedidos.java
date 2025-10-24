@@ -29,7 +29,7 @@ public class AdministradorPedidos implements Serializable{
         }
     }
     
-    public boolean crearPedido(Pedidos pedido) {
+    public boolean crearPedido(Pedidos pedido){
         if(contadorPedidos<MAX&& buscarPedidoCodigo(pedido.getCodigo())==null){
             pedidos[contadorPedidos]=pedido;
             contadorPedidos++;
