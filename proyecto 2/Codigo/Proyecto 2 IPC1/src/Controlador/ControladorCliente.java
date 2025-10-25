@@ -31,6 +31,7 @@ public class ControladorCliente{
         this.carritoCantidades = new int[MAX];
         this.carrito =new Productos[MAX];
         this.contadorCarrito= 0;
+        cargarHistorialCompras();
         configurarEventos();
         cargarProductosTabla();
     }   
@@ -48,7 +49,19 @@ public class ControladorCliente{
                     agregarProductoCarrito(codigoProducto);
                 }
             }
-        });   
+        });  
+        
+        vista.getTblCarritoCompraMC().addMouseListener(new java.awt.event.MouseAdapter(){
+        public void mouseClicked(java.awt.event.MouseEvent evt){
+            JTable tabla = vista.getTblCarritoCompraMC();
+            int fila = tabla.getSelectedRow();
+            int columna = tabla.getSelectedColumn();
+        
+            if (fila>=0&& columna==5){ 
+            eliminarProductoCarrito(fila);
+            }
+        }
+        });
     }
     
     private double calcularTotalCarrito(){
@@ -116,7 +129,7 @@ public class ControladorCliente{
             JTable tablaCarrito=vista.getTblCarritoCompraMC(); 
             DefaultTableModel modelo=(DefaultTableModel) tablaCarrito.getModel();
             modelo.setRowCount(0); 
-            double total = 0;
+            double total =0;
             for(int i=0;i<contadorCarrito; i++){
                 Productos producto= carrito[i];
                 int cantidad=carritoCantidades[i];
@@ -156,6 +169,48 @@ public class ControladorCliente{
         } 
         catch (Exception e){
             JOptionPane.showMessageDialog(vista, "Error");
+        }
+    }
+    
+    private void eliminarProductoCarrito(int indice){
+        try{
+            String nombreProducto=carrito[indice].getNombreProducto();
+            int confirmacion=JOptionPane.showConfirmDialog(vista, "¿Eliminar " +nombreProducto + " del carrito?","Confirmar eliminación", JOptionPane.YES_NO_OPTION);
+        
+            if(confirmacion==JOptionPane.YES_OPTION){
+                for(int i=indice; i<contadorCarrito -1;i++){
+                    carrito[i] = carrito[i +1];
+                    carritoCantidades[i] =carritoCantidades[i+ 1];
+                }
+                contadorCarrito--;
+                actualizarCarrito();
+                JOptionPane.showMessageDialog(vista,"Producto eliminado del carito");
+            }
+        } 
+        catch(Exception e){
+        JOptionPane.showMessageDialog(vista, "Error al eliminar producto");
+        }
+    } 
+    
+//--------------------------------------------------------------------------------------------------------------------------
+    
+    private void cargarHistorialCompras() {
+        try{
+            Pedidos[] pedidosCliente=adminPedidos.obtenerPedidosPorCliente(clienteActual.getCodigo());
+            JTable tablaHistorial=vista.getTblHistorialComprasMC();
+            DefaultTableModel modelo =(DefaultTableModel) tablaHistorial.getModel();
+            modelo.setRowCount(0);
+        
+            for(Pedidos pedido: pedidosCliente){
+                Object[] fila={pedido.getCodigo(),pedido.getFechaGeneracion(),pedido.getTotal()};
+                modelo.addRow(fila);
+            }
+        
+        System.out.println("Historial cargado: " + pedidosCliente.length + " pedidos");
+        
+        } 
+        catch (Exception e){
+        System.out.println("Error al cargar historial: " + e.getMessage());
         }
     }    
 }

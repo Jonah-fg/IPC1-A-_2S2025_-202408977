@@ -35,8 +35,12 @@ public class VistaCliente extends javax.swing.JFrame {
         return tblCarritoCompraMC;
     }
     
-    public javax.swing.JButton getBtonRealizarPedido() {
+    public javax.swing.JButton getBtonRealizarPedido(){
         return btonRealizarPedido;
+    }
+    
+    public javax.swing.JTable getTblHistorialComprasMC(){
+        return tblHistorialComprasMC;
     }
 
     /**

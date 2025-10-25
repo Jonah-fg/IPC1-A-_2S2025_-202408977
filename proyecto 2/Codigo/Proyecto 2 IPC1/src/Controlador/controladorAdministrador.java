@@ -8,6 +8,7 @@ import Modelo.ProductosGenerales;
 import Modelo.ProductosTecnologicos;
 import Modelo.Usuario;
 import Modelo.Vendedor;
+import Reportes_e_hilos.GeneradorReportes;
 import Vista.VistaActualizarProducto;
 import Vista.VistaActualizarVendedor;
 import Vista.VistaAdministrador;
@@ -15,17 +16,23 @@ import Vista.VistaCreacionProductos;
 import Vista.VistaCrearVendedor;
 import Vista.VistaEliminarProducto;
 import Vista.VistaEliminarVendedor;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 public class controladorAdministrador {
     private VistaAdministrador vista;
     private AdministradorProductos adminProductos;
+    private GeneradorReportes generadorReportes;
     private AdministradorUsuarios adminUsuarios;
 
     public controladorAdministrador(VistaAdministrador vista){
         this.adminProductos = new AdministradorProductos();
         this.vista = vista; 
         this.adminUsuarios = new AdministradorUsuarios();
+        this.generadorReportes = new GeneradorReportes(adminUsuarios, adminProductos);
         if(vista!= null){   
            configurarEventos();
            actualizarTablaVendedores();
@@ -35,9 +42,16 @@ public class controladorAdministrador {
     
     private void configurarEventos(){
         vista.getBtonCrear_ProductosMA().addActionListener(e -> abrirVentanaCrearProducto());
+        vista.getBtonActualizar_ProductosMA().addActionListener(e -> abrirVentanaActualizarProducto());
+        vista.getBtonEliminarProductosMA().addActionListener(e -> abrirVentanaEliminarProducto());
         vista.getBtonCrearVendedoresMA().addActionListener(e -> abrirVentanaCrearVendedor());
-        vista.getBtonActualizarVendedoresMA().addActionListener(e -> abrirVentanaActualizarVendedor());
-        vista.getBtonEliminarVendedoresMA().addActionListener(e -> abrirVentanaEliminarVendedor());
+        vista.getBtonActualizarVendedoresMA().addActionListener(e ->abrirVentanaActualizarVendedor());
+        vista.getBtonEliminarVendedoresMA().addActionListener(e ->abrirVentanaEliminarVendedor());
+        vista.getBtonReporteInventario().addActionListener(e ->generadorReportes.generarReporteInventario());
+        vista.getBtonReporteVentas().addActionListener(e ->generadorReportes.generarReporteVentas());
+        vista.getBtonReporteClientes().addActionListener(e->generadorReportes.generarReporteClientes());
+        vista.getBtonCargarProductos().addActionListener(e -> cargarProductosDesdeCSV());
+        vista.getBtonReporteProductos().addActionListener(e->generadorReportes.generarReporteProductos());
     }
     
     public boolean crearProducto(String nombre, String codigo, String categoria, double precio, String atributoEspecial){  
@@ -134,31 +148,38 @@ public class controladorAdministrador {
     }
     
     public void actualizarProductoDesdeVentana(VistaActualizarProducto ventana){
-    try {
-        String codigo=ventana.getTxtCodigoBuscar();
-        String nombreNuevo=ventana.getTxtNuevoNombre();
-        String atributoNuevo =ventana.getTxtNuevoAtributo();
+        try{
+            String codigo=ventana.getTxtCodigoBuscar();
+            String nombreNuevo=ventana.getTxtNuevoNombre();
+            String atributoNuevo =ventana.getTxtNuevoAtributo();
         
-        if (codigo.isEmpty()||nombreNuevo.isEmpty()|| atributoNuevo.isEmpty()){
-            JOptionPane.showMessageDialog(ventana, "Todos los campos son obligatorios");
-            return;
-        }
-        boolean exito=actualizarProducto(codigo,nombreNuevo, atributoNuevo);
+            if(codigo.isEmpty()||nombreNuevo.isEmpty()|| atributoNuevo.isEmpty()){
+                JOptionPane.showMessageDialog(ventana, "Todos los campos son obligatorios");
+                return;
+            }
+            boolean exito=actualizarProducto(codigo,nombreNuevo, atributoNuevo);
         
-        if (exito){
-            JOptionPane.showMessageDialog(ventana,"Producto actualizado exitosamente");
-            ventana.dispose();
-            actualizarTablaProductos();
+            if(exito){
+                JOptionPane.showMessageDialog(ventana,"Producto actualizado exitosamente");
+                ventana.dispose();
+                actualizarTablaProductos();
+            } 
+            else{
+                JOptionPane.showMessageDialog(ventana, "Error: Producto no encontrado o datos inválidos");
+            }
+        
         } 
-        else{
-            JOptionPane.showMessageDialog(ventana, "Error: Producto no encontrado o datos inválidos");
+        catch (Exception e){
+            JOptionPane.showMessageDialog(ventana,"Error: "+ e.getMessage());
         }
-        
-    } 
-    catch (Exception e){
-        JOptionPane.showMessageDialog(ventana,"Error: "+ e.getMessage());
-    }
    }
+    
+    public void abrirVentanaActualizarProducto(){
+        VistaActualizarProducto vistaActualizar=new VistaActualizarProducto();
+        vistaActualizar.setLocationRelativeTo(vista);
+        vistaActualizar.setControlador(this);
+        vistaActualizar.setVisible(true);
+    }
 
  //--------------------------------------------------------------------------------------------------------
     
@@ -198,8 +219,14 @@ public class controladorAdministrador {
             actualizarTablaProductos();
         }
         return exito;
-    }  
+    }
     
+    public void abrirVentanaEliminarProducto(){
+        VistaEliminarProducto vistaEliminar=new VistaEliminarProducto();
+        vistaEliminar.setLocationRelativeTo(vista);
+        vistaEliminar.setControlador(this);
+        vistaEliminar.setVisible(true);
+    }
 //---------------------------------------------------------------------------------------------  
     
     public String obtenerDetallesProducto(String codigo){
@@ -307,6 +334,7 @@ public class controladorAdministrador {
       return null;
     }
     
+    
     public boolean actualizarVendedor(String codigo, String nuevoNombre,String nuevaContraseña){
         try{
             return adminUsuarios.actualizarUsuario(nuevoNombre, codigo, nuevaContraseña);
@@ -315,6 +343,7 @@ public class controladorAdministrador {
             return false;
         }
     }
+    
     
     public void actualizarVendedorDesdeVentana(VistaActualizarVendedor ventana) {
         try{
@@ -416,4 +445,44 @@ public class controladorAdministrador {
     public void actualizarTablaProductos(){
         cargarProductosTabla();      
     }
-}
+    
+//-----------------------------------------------------------------------------------------------------------------------------
+    
+    public void cargarProductosDesdeCSV(){
+        try{
+            JFileChooser fileChooser =new JFileChooser();
+        
+            if (fileChooser.showOpenDialog(vista) == JFileChooser.APPROVE_OPTION){
+                File archivo = fileChooser.getSelectedFile();
+                BufferedReader lector=new BufferedReader(new FileReader(archivo));
+            
+                String linea;
+                int contadorProducto = 0;
+                lector.readLine();          
+                while((linea = lector.readLine()) != null && contadorProducto < 100){
+                    String[] datos = linea.split(",");
+                
+                    if (datos.length>=5){
+                        String codigo=datos[0].trim();
+                        String nombre=datos[1].trim();
+                        String categoria=datos[2].trim();
+                        String atributo =datos[3].trim();
+                        double precio =Double.parseDouble(datos[4].trim());
+                    
+                        boolean exito = crearProducto(nombre, codigo, categoria, precio, atributo);
+                        if (exito){
+                        contadorProducto++;
+                        }
+                    }
+                }
+                lector.close();
+                cargarProductosTabla();
+                JOptionPane.showMessageDialog(vista, "Cargados " + contadorProducto + " productos desde CSV");
+            }
+          } 
+        catch (Exception e){
+            JOptionPane.showMessageDialog(vista, "Error al cargar productos: " + e.getMessage());
+        }
+    }
+        
+}             

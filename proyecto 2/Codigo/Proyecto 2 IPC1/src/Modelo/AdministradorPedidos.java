@@ -61,7 +61,7 @@ public class AdministradorPedidos implements Serializable{
      
     public Pedidos[] obtenerPedidosPendientes(){
         int contador=0;
-        for (int i=0; i<contadorPedidos;i++){
+        for(int i=0; i<contadorPedidos;i++){
             if (!pedidos[i].esConfirmado()){
                 contador++;
             }
@@ -84,6 +84,23 @@ public class AdministradorPedidos implements Serializable{
             todosPedidos[i]=pedidos[i];
         }
         return todosPedidos;
+    }
+    
+    public Pedidos[] obtenerPedidosPorCliente(String codigoCliente){
+        int contador=0;
+        for(int i =0; i<contadorPedidos; i++){
+            if(pedidos[i].getCodigoCliente().equals(codigoCliente) &&  pedidos[i].esConfirmado()){
+                contador++;
+            }
+        }
+        Pedidos[] pedidosCliente=new Pedidos[contador];
+        int iterador=0;
+        for(int i=0; i<contadorPedidos;i++) {
+            if(pedidos[i].getCodigoCliente().equals(codigoCliente) && pedidos[i].esConfirmado()){ pedidosCliente[iterador] =pedidos[i];
+            iterador++;
+            }
+        }
+        return pedidosCliente;
     }
     
     public String generarCodigoPedido() {

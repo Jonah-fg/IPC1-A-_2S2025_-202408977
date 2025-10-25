@@ -73,6 +73,22 @@ public class VistaAdministrador extends javax.swing.JFrame {
     public javax.swing.JTable getTblProductosMA() {
         return tblProductosMA;
     }
+    
+    public javax.swing.JButton getBtonReporteInventario() {
+        return btonReporteInventario;
+    }
+
+    public javax.swing.JButton getBtonReporteVentas() {
+        return btonReporteVentas;
+    }
+
+    public javax.swing.JButton getBtonReporteClientes() {
+        return btonReporteClientes;
+    }
+
+    public javax.swing.JButton getBtonReporteProductos() {
+        return btonReporteProductos;
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -102,7 +118,14 @@ public class VistaAdministrador extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         tblProductosMA = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
-        btonGenerarReportes_MA = new javax.swing.JToggleButton();
+        jLabel2 = new javax.swing.JLabel();
+        btonReporteClientes = new javax.swing.JButton();
+        btonReporteInventario = new javax.swing.JButton();
+        btonReporteVentas = new javax.swing.JButton();
+        btonReporteProductos = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btonCerrarSesion = new javax.swing.JButton();
 
@@ -295,28 +318,67 @@ public class VistaAdministrador extends javax.swing.JFrame {
 
         vendedores.addTab("productos", jPanel2);
 
-        btonGenerarReportes_MA.setText("Generar Reportes");
-        btonGenerarReportes_MA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btonGenerarReportes_MAActionPerformed(evt);
-            }
-        });
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Panel de Reportes");
+
+        btonReporteClientes.setText("Reporte de clientes");
+
+        btonReporteInventario.setText("Reporte de inventario");
+
+        btonReporteVentas.setText("Reporte de ventas");
+
+        btonReporteProductos.setText("Reporte de productos");
+
+        jButton5.setText("jButton5");
+
+        jButton6.setText("jButton6");
+
+        jButton7.setText("jButton7");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(199, 199, 199)
-                .addComponent(btonGenerarReportes_MA, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btonReporteInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btonReporteClientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(71, 71, 71)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btonReporteVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btonReporteProductos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(41, 41, 41))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(136, 136, 136)
-                .addComponent(btonGenerarReportes_MA, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btonReporteClientes, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btonReporteVentas, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btonReporteProductos, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btonReporteInventario, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
         );
 
         vendedores.addTab("Reportes", jPanel3);
@@ -366,10 +428,6 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private void btonCrear_ProductosMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonCrear_ProductosMAActionPerformed
     
     }//GEN-LAST:event_btonCrear_ProductosMAActionPerformed
-
-    private void btonGenerarReportes_MAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonGenerarReportes_MAActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btonGenerarReportes_MAActionPerformed
 
     private void btonActualizar_vendedoresMAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btonActualizar_vendedoresMAActionPerformed
         
@@ -431,8 +489,15 @@ public class VistaAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton btonCrear_vendedoresMA;
     private javax.swing.JButton btonEliminar_productosMA;
     private javax.swing.JButton btonEliminar_vendedoresMA;
-    private javax.swing.JToggleButton btonGenerarReportes_MA;
+    private javax.swing.JButton btonReporteClientes;
+    private javax.swing.JButton btonReporteInventario;
+    private javax.swing.JButton btonReporteProductos;
+    private javax.swing.JButton btonReporteVentas;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
