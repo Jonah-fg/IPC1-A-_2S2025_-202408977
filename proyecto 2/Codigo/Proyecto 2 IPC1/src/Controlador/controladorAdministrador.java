@@ -47,11 +47,12 @@ public class controladorAdministrador {
         vista.getBtonCrearVendedoresMA().addActionListener(e -> abrirVentanaCrearVendedor());
         vista.getBtonActualizarVendedoresMA().addActionListener(e ->abrirVentanaActualizarVendedor());
         vista.getBtonEliminarVendedoresMA().addActionListener(e ->abrirVentanaEliminarVendedor());
-        vista.getBtonReporteInventario().addActionListener(e ->generadorReportes.generarReporteInventario());
+        vista.getBtonReporteInventario().addActionListener(e->generadorReportes.generarReporteInventario());
         vista.getBtonReporteVentas().addActionListener(e ->generadorReportes.generarReporteVentas());
         vista.getBtonReporteClientes().addActionListener(e->generadorReportes.generarReporteClientes());
         vista.getBtonCargarProductos().addActionListener(e -> cargarProductosDesdeCSV());
         vista.getBtonReporteProductos().addActionListener(e->generadorReportes.generarReporteProductos());
+        vista.getBtonCargarVendedoresMA().addActionListener(e-> cargarVendedoresDesdeCSV());
     }
     
     public boolean crearProducto(String nombre, String codigo, String categoria, double precio, String atributoEspecial){  
@@ -184,14 +185,12 @@ public class controladorAdministrador {
  //--------------------------------------------------------------------------------------------------------
     
     public void eliminarProductoDesdeVentana(VistaEliminarProducto ventana){
-        
         try{
             String codigo=ventana.getTxtCodigoEliminar();
             if(codigo.isEmpty()){
                 JOptionPane.showMessageDialog(ventana,"Debes ingrese un cdigo");
                 return;
             }
-        
             int confirmacion=JOptionPane.showConfirmDialog(ventana,"¿Está seguro de eliminar el producto "+codigo+ "?", "Confirmar Eliminación", 
             JOptionPane.YES_NO_OPTION);
         
@@ -457,7 +456,7 @@ public class controladorAdministrador {
                 BufferedReader lector=new BufferedReader(new FileReader(archivo));
             
                 String linea;
-                int contadorProducto = 0;
+                int contadorProducto= 0;
                 lector.readLine();          
                 while((linea = lector.readLine()) != null && contadorProducto < 100){
                     String[] datos = linea.split(",");
@@ -469,7 +468,7 @@ public class controladorAdministrador {
                         String atributo =datos[3].trim();
                         double precio =Double.parseDouble(datos[4].trim());
                     
-                        boolean exito = crearProducto(nombre, codigo, categoria, precio, atributo);
+                        boolean exito= crearProducto(nombre, codigo, categoria, precio, atributo);
                         if (exito){
                         contadorProducto++;
                         }
@@ -484,5 +483,41 @@ public class controladorAdministrador {
             JOptionPane.showMessageDialog(vista, "Error al cargar productos: " + e.getMessage());
         }
     }
+    
+    
+    public void cargarVendedoresDesdeCSV(){
+        try{
+            JFileChooser fileChooser=new JFileChooser();
         
+            if(fileChooser.showOpenDialog(vista)==JFileChooser.APPROVE_OPTION){
+                File archivo=fileChooser.getSelectedFile();
+                BufferedReader lector=new BufferedReader(new FileReader(archivo));
+                String linea;
+                int contadorVendedores= 0;
+                lector.readLine();
+            
+                while((linea=lector.readLine())!=null &&contadorVendedores<100){
+                    String[] datos=linea.split(",");
+                    if(datos.length>=4){
+                        String codigo=datos[0].trim();
+                        String nombre=datos[1].trim();
+                        String genero= datos[2].trim();
+                        String contraseña=datos[3].trim();
+                        
+                        if(adminUsuarios.buscarUsuarioCodigo(codigo)== null){
+                            boolean exito=adminUsuarios.crearVendedor(nombre, codigo, genero, contraseña);
+                            if(exito){
+                                contadorVendedores++;
+                            }
+                        }
+                    }
+                }
+                lector.close();  
+                actualizarTablaVendedores();
+            }
+        } 
+        catch(Exception e){
+        JOptionPane.showMessageDialog(vista, "Error al cargar vendedores: " + e.getMessage());
+        }
+    }    
 }             

@@ -49,7 +49,7 @@ public class AdministradorPedidos implements Serializable{
     }
     
     
-     public boolean confirmarPedido(String codigoPedido){
+    public boolean confirmarPedido(String codigoPedido){
         Pedidos pedido =buscarPedidoCodigo(codigoPedido);
         if(pedido!=null &&!pedido.esConfirmado()) {
             pedido.setConfirmacion(true);

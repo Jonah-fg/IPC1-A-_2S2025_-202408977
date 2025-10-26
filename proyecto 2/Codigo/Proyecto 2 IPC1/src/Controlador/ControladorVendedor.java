@@ -6,12 +6,17 @@ import Modelo.AdministradorUsuarios;
 import Modelo.Cliente;
 import Modelo.Pedidos;
 import Modelo.Productos;
+import Modelo.Usuario;
 import Modelo.Vendedor;
 import Vista.VistaActualizarCliente;
 import Vista.VistaAgregarStock;
 import Vista.VistaCrearCliente;
 import Vista.VistaEliminarCliente;
 import Vista.VistaVendedor;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -49,6 +54,7 @@ public class ControladorVendedor{
         vista.getBtonCrear_Clientes().addActionListener(e -> abrirVentanaCrearCliente());
         vista.getBtonEliminarCliente().addActionListener(e -> abrirVentanaEliminarCliente());
         vista.getBtonActualizarCliente().addActionListener(e -> abrirVentanaActualizarCliente());
+        vista.getBtonCargar_ClientesMV().addActionListener(e->cargarClientesDesdeCSV());
     }
     
     
@@ -307,18 +313,24 @@ public class ControladorVendedor{
      
     public void confirmarPedido(String codigoPedido){
         try{
-            boolean exito=adminPedidos.confirmarPedido(codigoPedido);
-            if (exito){
-                JOptionPane.showMessageDialog(vista, "Pedido confirmado exitosamente");
-                cargarPedidosTabla();
-                vendedorActual.incrementarVentas();
+            boolean pedidoConfirmado = adminPedidos.confirmarPedido(codigoPedido);      
+            if(pedidoConfirmado){
+
+            Usuario vendedorEnSistema = adminUsuarios.buscarUsuarioCodigo(vendedorActual.getCodigo());
+            if(vendedorEnSistema instanceof Vendedor){
+                Vendedor vendedorReal=(Vendedor) vendedorEnSistema;
+                vendedorReal.incrementarVentas();
+            }
+            adminUsuarios.guardarUsuariosEnArchivo();   
+            JOptionPane.showMessageDialog(vista,"Pedido confirmado exitosamente");
+            cargarPedidosTabla();
             } 
             else{
                 JOptionPane.showMessageDialog(vista, "Error: Pedido no encontrado o ya confirmado");
             }
         } 
-        catch (Exception e){
-            JOptionPane.showMessageDialog(vista, "Error al confirmar pedido: " + e.getMessage());
+        catch(Exception e){
+        JOptionPane.showMessageDialog(vista, "Error al confirmar pedido: " + e.getMessage());
         }
     }
       
@@ -339,11 +351,51 @@ public class ControladorVendedor{
                     }
                 } 
                 else{
-                    JOptionPane.showMessageDialog(vista, "Este pedido ya está confirmado");
+                    JOptionPane.showMessageDialog(vista,"Este pedido ya está cofirmado");
                 }
             }
         }
      
+    }
+    
+//----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    public void cargarClientesDesdeCSV(){
+        try{
+            JFileChooser fileChooser=new JFileChooser(); 
+            if(fileChooser.showOpenDialog(vista)==JFileChooser.APPROVE_OPTION){
+                File archivo=fileChooser.getSelectedFile();
+                BufferedReader lector=new BufferedReader(new FileReader(archivo));
+                String linea;
+                int contadorClientes =0;
+                lector.readLine();
+            
+                while((linea=lector.readLine())!=null&& contadorClientes<100){
+                    String[] datos = linea.split(",");
+                    if(datos.length>=5) {
+                        String codigo=datos[0].trim();
+                        String nombre=datos[1].trim();
+                        String genero =datos[2].trim();
+                        String cumpleaños= datos[3].trim();
+                        String contraseña=datos[4].trim();
+ 
+                       if(adminUsuarios.buscarUsuarioCodigo(codigo)==null) {
+                            boolean exito=adminUsuarios.crearCliente(nombre, codigo, genero, contraseña, cumpleaños);
+                            if(exito){
+                               contadorClientes++;
+                            }
+                        }
+                    }
+                }
+                lector.close();
+               cargarClientesTabla();
+                JOptionPane.showMessageDialog(vista,"Cargados "+ contadorClientes+" clientes desde CSV");
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(vista,"Error al cargar clietes: " + e.getMessage());
+        }
+    
     }
         
 }

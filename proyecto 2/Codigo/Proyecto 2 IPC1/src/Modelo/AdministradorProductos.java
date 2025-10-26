@@ -98,12 +98,12 @@ public class AdministradorProductos implements Serializable{
     }
     
     @SuppressWarnings("unchecked")
-    private void cargarDesdeArchivo() {
+    private void cargarDesdeArchivo(){
         try(ObjectInputStream entrada=new ObjectInputStream(new FileInputStream(Archivo_productos))){        
             Productos[] productosCargados=(Productos[]) entrada.readObject();
             contadorProductos=entrada.readInt();
             
-            for(int i=0; i<contadorProductos&& i<MAX;i++){
+            for(int i=0;i<contadorProductos&& i<MAX;i++){
                 productos[i]=productosCargados[i];
             }
         }

@@ -16,7 +16,7 @@ public class Productos implements Serializable {
         this.codigoProducto = codigoProducto;
         this.categoria = Categoria;
         this.precio = precio;
-        this.stock=10;
+        this.stock=0;
     }
 
     public String getNombreProducto() {

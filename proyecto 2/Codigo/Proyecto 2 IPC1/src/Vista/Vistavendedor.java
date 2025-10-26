@@ -46,11 +46,15 @@ public class VistaVendedor extends javax.swing.JFrame {
     public javax.swing.JButton getBtonEliminarCliente() {
         return btonEliminar_ClientesMV;
     }
+    
+    public javax.swing.JButton getBtonCargar_ClientesMV() {
+        return btonCargar_ClientesMV;
+    }
 
-// ✅ GETTERS PARA LA PESTAÑA PEDIDOS (para después)
     public javax.swing.JTable getTblPedidosMV() {
         return tblPedidosMV;
     }
+    
       
 
     /**
