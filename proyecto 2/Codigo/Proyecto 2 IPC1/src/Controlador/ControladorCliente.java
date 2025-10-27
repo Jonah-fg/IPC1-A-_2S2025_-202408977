@@ -3,10 +3,12 @@ package Controlador;
 
 import Modelo.AdministradorPedidos;
 import Modelo.AdministradorProductos;
+import Modelo.Bitacora;
 import Modelo.Cliente;
 import Modelo.Pedidos;
 import Modelo.Productos;
 import Vista.VistaCliente;
+import Vista.VistaInicioSesion;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -44,7 +46,7 @@ public class ControladorCliente{
                 int fila=tabla.getSelectedRow();
                 int columna=tabla.getSelectedColumn(); 
         
-                if(fila>=0 && columna==4){
+                if(fila>=0&& columna==4){
                     String codigoProducto=tabla.getValueAt(fila,0).toString();
                     agregarProductoCarrito(codigoProducto);
                 }
@@ -61,8 +63,16 @@ public class ControladorCliente{
             eliminarProductoCarrito(fila);
             }
         }
-        });
+        });       
+        vista.getBtonCerrarSesionCliente().addActionListener(e -> {
+        int confirmacion=JOptionPane.showConfirmDialog(vista,"¿Está segro que desea cerrar sesión?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(confirmacion ==JOptionPane.YES_OPTION){
+            vista.dispose();
+            new VistaInicioSesion().setVisible(true);
+        }
+        } );
     }
+    
     
     private double calcularTotalCarrito(){
         double total=0;
@@ -87,6 +97,22 @@ public class ControladorCliente{
                 JOptionPane.showMessageDialog(vista,"Carrito vacío");
                 return;
             }  
+            
+            for(int i=0;i<contadorCarrito; i++){
+                Productos producto=carrito[i];
+                int cantidadSolicitada=carritoCantidades[i];
+                if(producto.getStock()<cantidadSolicitada){
+                    JOptionPane.showMessageDialog(vista,  "Stock insuficiene: " +producto.getNombreProducto()+ "\nStock disponible: " + producto.getStock() + "Solicitado: " +cantidadSolicitada);
+                    return;
+                }
+            }
+        
+            for(int i=0;i<contadorCarrito; i++){
+                Productos producto=carrito[i];
+                int cantidadSolicitada=carritoCantidades[i];
+                producto.reducirStock(cantidadSolicitada); 
+            }
+            adminProductos.guardarEnArchivo();   
             double total=0;
             for(int i=0; i<contadorCarrito;i++){
                 total+=carrito[i].getPrecio()*carritoCantidades[i];
@@ -96,14 +122,17 @@ public class ControladorCliente{
             Pedidos nuevoPedido=new Pedidos(codigoPedido, clienteActual.getCodigo(),fechaActual, clienteActual.getNombre(), total);
             boolean exito=adminPedidos.crearPedido(nuevoPedido);
             if (exito){
+                Bitacora.registrarBitacora("CLIENTE", clienteActual.getCodigo(), "REALIZAR_PEDIDO", "EXITOSO","Pedido: " + codigoPedido + " -Productos: " + contadorCarrito + " - Total: Q" +total);
                 JOptionPane.showMessageDialog(vista, "Pedido realizado exitosamente");
                 limpiarCarrito();
             } 
             else{
+                Bitacora.registrarBitacora("CLIENTE", clienteActual.getCodigo(), "REALIZAR_PEDIDO", "ERROR","No se pudo crear pedid en el sistema");
                 JOptionPane.showMessageDialog(vista,"Error al crear pedido");
             }
         } 
         catch (Exception e){
+            Bitacora.registrarBitacora("CLIENTE", clienteActual.getCodigo(), "REALIZAR_PEDIDO", "ERROR", "Exepción: " + e.getMessage());
             JOptionPane.showMessageDialog(vista,"Error: " + e.getMessage());
         }
     }    

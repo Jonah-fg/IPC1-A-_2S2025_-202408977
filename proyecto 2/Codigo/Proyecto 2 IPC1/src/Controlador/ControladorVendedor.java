@@ -3,6 +3,7 @@ package Controlador;
 import Modelo.AdministradorPedidos;
 import Modelo.AdministradorProductos;
 import Modelo.AdministradorUsuarios;
+import Modelo.Bitacora;
 import Modelo.Cliente;
 import Modelo.Pedidos;
 import Modelo.Productos;
@@ -12,6 +13,7 @@ import Vista.VistaActualizarCliente;
 import Vista.VistaAgregarStock;
 import Vista.VistaCrearCliente;
 import Vista.VistaEliminarCliente;
+import Vista.VistaInicioSesion;
 import Vista.VistaVendedor;
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,6 +57,14 @@ public class ControladorVendedor{
         vista.getBtonEliminarCliente().addActionListener(e -> abrirVentanaEliminarCliente());
         vista.getBtonActualizarCliente().addActionListener(e -> abrirVentanaActualizarCliente());
         vista.getBtonCargar_ClientesMV().addActionListener(e->cargarClientesDesdeCSV());
+        vista.getBotnCargar_productosMV().addActionListener(e -> cargarStockDesdeCSV());
+        vista.getBtonCerrarSesionVendedor().addActionListener(e -> {
+        int confirmacion=JOptionPane.showConfirmDialog(vista, "¿Está seguro que desea cerrar sesin?", "Cerrar Sesión", JOptionPane.YES_NO_OPTION);
+        if(confirmacion==JOptionPane.YES_OPTION){
+            vista.dispose();
+            new VistaInicioSesion().setVisible(true);
+        }
+    });
     }
     
     
@@ -64,11 +74,13 @@ public class ControladorVendedor{
             if (producto!= null){
                 producto.agregarStock(cantidad);
                 adminProductos.guardarEnArchivo();
+                Bitacora.registrarBitacora("VENDEDOR", vendedorActual.getCodigo(), "AGREGAR_STOCK", "EXITOSO","Producto: " + codigoProducto + " - Cantidad: " + cantidad);
                 return true;
             }
             return false;
         } 
         catch (Exception e){
+            Bitacora.registrarBitacora("VENDEDOR", vendedorActual.getCodigo(), "AGREGAR_STOCK", "ERROR", "Error: " + e.getMessage());
             return false;
         }
     }
@@ -131,7 +143,7 @@ public class ControladorVendedor{
     
 //--------------------------------------------------------------------------------------------------------------------------
     
-        public void crearClienteDesdeVentana(VistaCrearCliente ventana) {
+    public void crearClienteDesdeVentana(VistaCrearCliente ventana) {
         try{
             String codigo=ventana.getTxtCodigo().getText();
             String nombre=ventana.getTxtNombreCliente().getText();
@@ -313,7 +325,7 @@ public class ControladorVendedor{
      
     public void confirmarPedido(String codigoPedido){
         try{
-            boolean pedidoConfirmado = adminPedidos.confirmarPedido(codigoPedido);      
+            boolean pedidoConfirmado =adminPedidos.confirmarPedido(codigoPedido);      
             if(pedidoConfirmado){
 
             Usuario vendedorEnSistema = adminUsuarios.buscarUsuarioCodigo(vendedorActual.getCodigo());
@@ -322,14 +334,17 @@ public class ControladorVendedor{
                 vendedorReal.incrementarVentas();
             }
             adminUsuarios.guardarUsuariosEnArchivo();   
+            Bitacora.registrarBitacora("VENDEDOR", vendedorActual.getCodigo(),"CONFIRMAR_PEDIDO","EXITOSO","Pedido confirmado: " +codigoPedido);
             JOptionPane.showMessageDialog(vista,"Pedido confirmado exitosamente");
             cargarPedidosTabla();
             } 
             else{
+                Bitacora.registrarBitacora("VENDEDOR", vendedorActual.getCodigo(),"CONFIRMAR_PEDIDO","ERROR","Pedido no encontrado o ya confirmado: " +codigoPedido);
                 JOptionPane.showMessageDialog(vista, "Error: Pedido no encontrado o ya confirmado");
             }
         } 
         catch(Exception e){
+        Bitacora.registrarBitacora("VENDEDOR",vendedorActual.getCodigo(),"CONFIRMAR_PEDIDO", "ERROR", "Excepción: " +e.getMessage());
         JOptionPane.showMessageDialog(vista, "Error al confirmar pedido: " + e.getMessage());
         }
     }
@@ -397,5 +412,40 @@ public class ControladorVendedor{
         }
     
     }
+    
+    
+    public void cargarStockDesdeCSV(){
+        try{
+            JFileChooser selectorArchivo=new JFileChooser();
+            if (selectorArchivo.showOpenDialog(vista)==JFileChooser.APPROVE_OPTION) {
+                File archivo=selectorArchivo.getSelectedFile();
+                BufferedReader lector=new BufferedReader(new FileReader(archivo));
+            
+                String linea;
+                int stockAgregado=0;
+                lector.readLine();
+                while((linea=lector.readLine())!= null && stockAgregado<100){
+                    String[] datos=linea.split(",");
+                    if(datos.length>=2){
+                        String codigoProducto =datos[0].trim();
+                        int cantidad=Integer.parseInt(datos[1].trim());
+                    
+                        Productos producto=adminProductos.buscarProductoCodigo(codigoProducto);
+                        if(producto != null && cantidad>0){
+                            producto.agregarStock(cantidad);
+                            stockAgregado++;
+                        }
+                    }
+                }
+                lector.close();
+                adminProductos.guardarEnArchivo();
+                cargarProductosTabla();
+                JOptionPane.showMessageDialog(vista,"Stock actualizad para "+ stockAgregado+" productos desde CSV");
+            }
+        } 
+        catch(Exception e){
+            JOptionPane.showMessageDialog(vista,"Error al cargar stock: " +e.getMessage());
+        }
+}
         
 }

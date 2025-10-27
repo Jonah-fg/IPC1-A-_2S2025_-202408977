@@ -2,6 +2,7 @@ package Controlador;
 
 import Modelo.AdministradorProductos;
 import Modelo.AdministradorUsuarios;
+import Modelo.Bitacora;
 import Modelo.Productos;
 import Modelo.ProductosAlimenticios;
 import Modelo.ProductosGenerales;
@@ -53,6 +54,19 @@ public class controladorAdministrador {
         vista.getBtonCargarProductos().addActionListener(e -> cargarProductosDesdeCSV());
         vista.getBtonReporteProductos().addActionListener(e->generadorReportes.generarReporteProductos());
         vista.getBtonCargarVendedoresMA().addActionListener(e-> cargarVendedoresDesdeCSV());
+        vista.getTblProductosMA().addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt){
+            javax.swing.JTable tabla=vista.getTblProductosMA();
+            int fila=tabla.getSelectedRow();
+            int columna=tabla.getSelectedColumn();
+            
+            if(fila>=0 &&columna==3){ 
+                String codigoProducto=tabla.getValueAt(fila, 0).toString();
+                String detalles=obtenerDetallesProducto(codigoProducto);
+                javax.swing.JOptionPane.showMessageDialog(vista, detalles,"Detalles del Producto",javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+        });      
     }
     
     public boolean crearProducto(String nombre, String codigo, String categoria, double precio, String atributoEspecial){  
@@ -75,11 +89,15 @@ public class controladorAdministrador {
                     return false;
             }  
             if (nuevoProducto!=null){
-                return adminProductos.crearProductos(nuevoProducto);
-            }
-            
+                boolean exito=adminProductos.crearProductos(nuevoProducto);
+                if(exito){
+                Bitacora.registrarBitacora("ADMIN", "admin", "CREAR_PRODUCTO", "EXITOSO", "Producto: " + codigo);
+                }
+            return exito;
+            }          
         } 
-        catch (NumberFormatException e){
+        catch(NumberFormatException e){
+            Bitacora.registrarBitacora("ADMIN", "admin", "CREAR_PRODUCTO", "ERROR", "Número inválido: " + atributoEspecial);
         }
         return false;
     }
@@ -215,6 +233,7 @@ public class controladorAdministrador {
     public boolean eliminarProductoAdministrador(String codigo){
         boolean exito=adminProductos.eliminarProducto(codigo);
         if(exito){
+            Bitacora.registrarBitacora("ADMIN", "admin", "ELIMINAR_PRODUCTO", "EXITOSO", "Producto eliminado: "+ codigo);
             actualizarTablaProductos();
         }
         return exito;
@@ -253,16 +272,30 @@ public class controladorAdministrador {
         }
         return detalle;
     }
+    
+    public void verDetallesProducto(String codigoProducto) {
+        try{
+            String detalles=obtenerDetallesProducto(codigoProducto);
+            JOptionPane.showMessageDialog(vista, detalles,"Detalles del Producto", JOptionPane.INFORMATION_MESSAGE);
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(vista, "Error al obtener detalles: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
      
 //----------------------------------------------------------------------------------------------
     
     public boolean crearVendedor(String codigo, String nombre, String genero, String contraseña) {
         try{
             Vendedor nuevoVendedor=new Modelo.Vendedor(nombre, codigo, genero, contraseña);
-            return adminUsuarios.crearUsuario(nuevoVendedor);
+            boolean exito=adminUsuarios.crearUsuario(nuevoVendedor);
+            if(exito){
+                Bitacora.registrarBitacora("ADMIN","admin","CREAR_VENDEDOR", "EXITOSO","Vendedor creado: "+ codigo);
+            }
+            return exito;
         }
-        catch (Exception e) {
-            System.out.println("Error al crear vendedor: " + e.getMessage());
+        catch(Exception e) {
+            Bitacora.registrarBitacora("ADMIN", "admin","CREAR_VENDEDOR","ERROR", "Error: "+ e.getMessage());
             return false;
         }
     }

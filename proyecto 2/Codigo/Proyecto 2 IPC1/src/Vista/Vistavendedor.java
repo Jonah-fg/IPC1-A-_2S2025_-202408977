@@ -55,6 +55,14 @@ public class VistaVendedor extends javax.swing.JFrame {
         return tblPedidosMV;
     }
     
+    public javax.swing.JToggleButton getBotnCargar_productosMV() {
+        return botnCargar_productosMV;
+    }
+    
+    public javax.swing.JButton getBtonCerrarSesionVendedor() {
+        return btonCerrarSesionVendedor;
+    }
+    
       
 
     /**
@@ -85,6 +93,7 @@ public class VistaVendedor extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         tblPedidosMV = new javax.swing.JTable();
+        btonCerrarSesionVendedor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("SanCarlista Shop -Modulo Vendedor");
@@ -277,6 +286,8 @@ public class VistaVendedor extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Pedidos", jPanel5);
 
+        btonCerrarSesionVendedor.setText("Cerrar Sesion");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -284,7 +295,9 @@ public class VistaVendedor extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(253, 253, 253)
+                        .addGap(30, 30, 30)
+                        .addComponent(btonCerrarSesionVendedor, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(91, 91, 91)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -294,10 +307,16 @@ public class VistaVendedor extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 16, Short.MAX_VALUE)
+                        .addComponent(btonCerrarSesionVendedor)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 25, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -345,6 +364,7 @@ public class VistaVendedor extends javax.swing.JFrame {
     private javax.swing.JButton btonActualizar_ClientesMV;
     private javax.swing.JToggleButton btonAgregarStock_ProductosMV;
     private javax.swing.JButton btonCargar_ClientesMV;
+    private javax.swing.JButton btonCerrarSesionVendedor;
     private javax.swing.JButton btonCrear_ClientesMV;
     private javax.swing.JButton btonEliminar_ClientesMV;
     private javax.swing.JLabel jLabel1;
