@@ -38,6 +38,7 @@ public class controladorAdministrador {
            configurarEventos();
            actualizarTablaVendedores();
            cargarProductosTabla(); 
+           tablaTopVendedores();
         }
     }
     
@@ -78,7 +79,7 @@ public class controladorAdministrador {
                     nuevoProducto=new ProductosTecnologicos(nombre, codigo, precio, mesesGarantia);
                     break;
                     
-                case "Alimento":
+                case "Alimenticio":
                     nuevoProducto=new ProductosAlimenticios(nombre, codigo, precio, atributoEspecial);
                     break;
                     
@@ -553,4 +554,41 @@ public class controladorAdministrador {
         JOptionPane.showMessageDialog(vista, "Error al cargar vendedores: " + e.getMessage());
         }
     }    
+    
+//-------------------------------------------------------------------------------------------------------------------------
+    
+    private void tablaTopVendedores(){
+        try{
+            Vendedor[] vendedores=adminUsuarios.getVendedores();
+            for(int i=0; i<vendedores.length-1; i++){
+                for(int j=i+1; j< vendedores.length;j++){
+                    if(vendedores[i].getVentasConfirmadas()<vendedores[j].getVentasConfirmadas()){
+                        Vendedor temporal=vendedores[i];
+                        vendedores[i]=vendedores[j];
+                        vendedores[j]=temporal;
+                    }
+                }
+            }
+            javax.swing.JTable tablaTop=vista.getTblTopVendedores();
+            javax.swing.table.DefaultTableModel modelo=(javax.swing.table.DefaultTableModel)tablaTop.getModel();
+            modelo.setRowCount(0); 
+        
+            for(int i=0;i<Math.min(3,vendedores.length); i++){
+                String posicion="";
+                if(i == 0){
+                    posicion="1ro";
+                }
+                else if(i==1){
+                    posicion ="2do";
+                } 
+                else if(i==2){
+                    posicion="3ro";
+                }
+                Object[] fila={posicion,vendedores[i].getNombre(),vendedores[i].getVentasConfirmadas() +" ventas"};
+                modelo.addRow(fila);
+            }
+        } 
+        catch(Exception e){
+        }
+    }
 }             

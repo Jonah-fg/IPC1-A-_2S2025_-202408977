@@ -8,7 +8,7 @@ public class ProductosAlimenticios extends Productos implements Serializable{
     private String fechaCaducidad;
     
     public ProductosAlimenticios(String nombreProducto, String codigoProducto, double precio, String fechaCaducidad) {
-        super(nombreProducto, codigoProducto, "Alimentos", precio);
+        super(nombreProducto, codigoProducto, "Alimenticio", precio);
         this.fechaCaducidad=fechaCaducidad;
     }
     

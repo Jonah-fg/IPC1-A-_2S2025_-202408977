@@ -6,3 +6,23 @@
 [26/10/2025 18:39:40] | CLIENTE | CL-002 | REALIZAR_PEDIDO | EXITOSO | Pedido: PED20251026183940 -Productos: 2 - Total: Q11350.0
 [26/10/2025 18:39:55] | LOGIN | PE001 | INICIAR_SESION | EXITOSO | Usuario entró al sisema
 [26/10/2025 18:40:02] | VENDEDOR | PE001 | CONFIRMAR_PEDIDO | EXITOSO | Pedido confirmado: PED20251026183940
+[26/10/2025 19:25:01] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 19:25:53] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 19:27:15] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 19:27:40] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 19:29:18] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 19:30:13] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 19:32:07] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:05:42] | LOGIN | PE001 | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:32:24] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:32:42] | LOGIN | PE001 | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:44:08] | LOGIN | PE001 | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:45:45] | LOGIN | IPC1A | INICIAR_SESION | FALLIDO | Contraseña incorrecta
+[26/10/2025 22:45:49] | LOGIN | IPC1A | INICIAR_SESION | FALLIDO | Contraseña incorrecta
+[26/10/2025 22:45:53] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:58:06] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 22:58:30] | ADMIN | admin | CREAR_PRODUCTO | EXITOSO | Producto: PRO0002
+[26/10/2025 23:17:04] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 23:53:08] | LOGIN | amdin | INICIAR_SESION | FALLIDO | Contraseña incorrecta
+[26/10/2025 23:53:12] | LOGIN | admin | INICIAR_SESION | EXITOSO | Usuario entró al sisema
+[26/10/2025 23:53:23] | ADMIN | admin | CREAR_VENDEDOR | EXITOSO | Vendedor creado: ´papa

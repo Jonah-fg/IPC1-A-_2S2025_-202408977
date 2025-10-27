@@ -50,11 +50,11 @@ public class ControladorIniciarSesion {
     public boolean IniciarSesion(String codigo, String contraseña){
          Usuario usuario=administrador.buscarUsuarioCodigo(codigo);
         if(usuario!=null&& usuario.getContraseña().equals(contraseña)){
-            Bitacora.registrarBitacora("LOGIN", codigo, "INICIAR_SESION", "EXITOSO", "Usuario entró al sisema");
+            Bitacora.registrarBitacora("LOGIN", codigo, "INICIAR_SESION", "EXITOSO","Usuario entró al sisema");
             redireccionSegunUsuario(usuario);
             return true;
         }
-       Bitacora.registrarBitacora("LOGIN", codigo, "INICIAR_SESION", "FALLIDO", "Contraseña incorrecta");
+       Bitacora.registrarBitacora("LOGIN", codigo,"INICIAR_SESION", "FALLIDO","Contraseña incorrecta");
        return false;
     }
        

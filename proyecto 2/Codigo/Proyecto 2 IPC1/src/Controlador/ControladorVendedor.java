@@ -65,6 +65,18 @@ public class ControladorVendedor{
             new VistaInicioSesion().setVisible(true);
         }
     });
+        vista.getTblProductosMV().addMouseListener(new java.awt.event.MouseAdapter() {
+        public void mouseClicked(java.awt.event.MouseEvent evt){
+            JTable tabla=vista.getTblProductosMV();
+            int fila=tabla.getSelectedRow();
+            int columna=tabla.getSelectedColumn();
+            
+            if(fila>=0 && columna==4){ 
+                String codigoProducto = tabla.getValueAt(fila, 0).toString();
+                mostrarHistorialProducto(codigoProducto);
+            }
+        }
+        });
     }
     
     
@@ -446,6 +458,22 @@ public class ControladorVendedor{
         catch(Exception e){
             JOptionPane.showMessageDialog(vista,"Error al cargar stock: " +e.getMessage());
         }
-}
-        
+    }
+    
+//--------------------------------------------------------------------------------------------------------------------------
+    
+    private void mostrarHistorialProducto(String codigoProducto){
+        try{
+            Productos producto=adminProductos.buscarProductoCodigo(codigoProducto);
+            if(producto!=null){String mensaje = "Historial de: " + producto.getNombreProducto()+"Código: "+ producto.getCodigoProducto() +"Categoría: " + producto.getCategoria() + "Stock actual: " + producto.getStock() +"Precio: Q" + producto.getPrecio();
+                JOptionPane.showMessageDialog(vista, mensaje,"Historial del Producto", JOptionPane.INFORMATION_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(vista,"Producto no encontrado");
+            }
+        } 
+        catch (Exception e){
+            JOptionPane.showMessageDialog(vista, "Error al cargar información del producto");
+        }
+    }    
 }

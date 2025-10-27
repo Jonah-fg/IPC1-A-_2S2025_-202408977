@@ -12,7 +12,7 @@ import java.util.Arrays;
 
 public class AdministradorUsuarios implements Serializable{
     private static final long serialVersionUID =1L;
-    private static final String Archivo_usuarios="usuarios.ser";
+    private static final String Archivo_usuarios="usuarios.ser"   ;
     private Usuario[] usuarios;
     private int contadorUsuarios;
     private int MAX;
@@ -137,31 +137,21 @@ public class AdministradorUsuarios implements Serializable{
     }
     
     public void guardarUsuariosEnArchivo(){
-          try (ObjectOutputStream salida = new ObjectOutputStream(
-            new FileOutputStream(Archivo_usuarios))) {
-        
-        System.out.println("🚀 DEBUG GUARDAR - Iniciando guardado..."); // ✅ DEBUG
-        System.out.println("🚀 DEBUG GUARDAR - Total usuarios: " + contadorUsuarios); // ✅ DEBUG
-        
+        try(ObjectOutputStream salida =new ObjectOutputStream(new FileOutputStream(Archivo_usuarios))){        
         Usuario[] usuariosGuardar = new Usuario[contadorUsuarios];
         for (int i = 0; i < contadorUsuarios; i++){
             usuariosGuardar[i] = usuarios[i];
             if(usuarios[i] instanceof Vendedor){
                 Vendedor v = (Vendedor) usuarios[i];
-                System.out.println("🚀 DEBUG GUARDAR - Vendedor: " + v.getCodigo() + " - Ventas: " + v.getVentasConfirmadas()); // ✅ DEBUG
             }
         }
-        
         salida.writeObject(usuariosGuardar);
-        salida.writeInt(contadorUsuarios);
-        System.out.println("✅ DEBUG GUARDAR - Archivo guardado EXITOSAMENTE"); // ✅ DEBUG
-        
-    } 
-    catch (IOException e){
-        System.out.println("❌ ERROR al guardar usuarios: " + e.getMessage()); // ✅ DEBUG
-        e.printStackTrace(); // ⭐ ESTO ES IMPORTANTE
+        salida.writeInt(contadorUsuarios);       
+        } 
+        catch(IOException e){
+        e.printStackTrace(); 
+        } 
     }
-}
     
     @SuppressWarnings("unchecked")
     private void cargarDesdeArchivo() {
@@ -171,7 +161,7 @@ public class AdministradorUsuarios implements Serializable{
             Usuario[] usuariosCargados=(Usuario[]) entrada.readObject();
             contadorUsuarios=entrada.readInt();          
             for(int i=0;i<contadorUsuarios&& i<MAX; i++) {
-                usuarios[i] = usuariosCargados[i];
+                usuarios[i] =usuariosCargados[i];
             }
         } 
         catch (FileNotFoundException e){
